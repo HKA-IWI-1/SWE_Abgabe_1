@@ -34,7 +34,7 @@ const { httpsOptions, port } = nodeConfig;
 
 const setupSwagger = (app: INestApplication) => {
     const config = new DocumentBuilder()
-        .setTitle('Projektname')
+        .setTitle('film')
         .setDescription('Projekt für das Modul Software Engineering')
         .setVersion('2024.04.0')
         .addBearerAuth()

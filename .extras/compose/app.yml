@@ -20,10 +20,10 @@ db:
 
   host: postgres
 
-  #username: Projektname
+  #username: film
   #password: p
   #passwordAdmin: p
-  #name: Projektname
+  #name: film
   populate: true
 
 # Keycloak

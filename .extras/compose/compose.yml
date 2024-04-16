@@ -41,7 +41,7 @@ include:
 # https://docs.docker.com/compose/compose-file/05-services
 services:
   buch:
-    image: HKA_IWI_1/Projektname:2024.04.0-bookworm
+    image: HKA_IWI_1/film:2024.04.0-bookworm
     depends_on:
       db:
         condition: service_healthy

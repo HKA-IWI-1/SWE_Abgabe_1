@@ -1,8 +1,8 @@
 {
-  "name": "Projektname",
+  "name": "film",
   "version": "2024.04.0",
   "description": "Projekt der SWE Gruppe 4, SoSe24.",
-  "author": "Florian Sauer",
+  "author": "Florian Sauer, Adrian Spindler, Ronny Friedmann, Luca Breisinger",
   "private": true,
   "license": "MIT",
   "exports": "./dist/src/main.js",

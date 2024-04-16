@@ -15,4 +15,4 @@
 
 services:
   trivy:
-    command: [image, HKA_IWI_1/Projektname:2024.04.0-wolfi]
+    command: [image, HKA_IWI_1/film:2024.04.0-wolfi]

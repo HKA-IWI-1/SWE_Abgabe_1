@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 #
-# Aufruf:   docker build --tag HKA_IWI_1/Projektname:2024.04.0-wolfi --file Dockerfile.wolfi .
+# Aufruf:   docker build --tag HKA_IWI_1/film:2024.04.0-wolfi --file Dockerfile.wolfi .
 #               ggf. --progress=plain
 #               ggf. --no-cache
 #           Get-Content Dockerfile.wolfi | docker run --rm --interactive hadolint/hadolint:2.12.1-beta-debian

@@ -18,7 +18,7 @@
 services:
   trivy:
     image: aquasec/trivy:0.50.0
-    command: [image, HKA_IWI_1/Projektname:2024.04.0-bookworm]
+    command: [image, HKA_IWI_1/film:2024.04.0-bookworm]
     volumes:
       - type: bind
         source: /Users/floriansauer/Zimmermann/volumes/trivy
