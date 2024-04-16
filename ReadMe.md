@@ -1,6 +1,9 @@
 # SWE Abgabe 1
 ## Style rules
 EOL: Unix Linebreak `\n`
-## todo
-- Auf gemeinsame Konventionen einigen; aus Beispielprojekt übernommene Dateien anpassen
-- film in package.json hinterlegen
+
+### Zugriffsmodifizierer:
+- private: `#` anstelle des Schlüsselwortes `private`
+
+### GraphQL
+- Das Abbilden einer Query auf eine Methode wird über Decorators (z.B. `@Query('film')`) vorgenommen, nicht über die Methodenbezeichnung.

@@ -28,7 +28,6 @@ import { getLogger } from './logger.js';
  */
 @Injectable()
 export class RequestLoggerMiddleware implements NestMiddleware {
-    // todo: abstimmen in Gruppe, wie Sichtbarkeitsmodifizierer `private`
     readonly #logger = getLogger(RequestLoggerMiddleware.name);
 
     /**
