@@ -65,6 +65,11 @@ module.exports = {
 
     extends: [
         // https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/src/configs/recommended-type-checked.ts
+        // TODO https://github.com/typescript-eslint/typescript-eslint/issues/5908
+        // TODO https://github.com/typescript-eslint/typescript-eslint/issues/5938
+        // TODO https://github.com/jest-community/eslint-plugin-jest/issues/1408
+        // TODO https://github.com/microsoft/vscode-eslint/blob/747efb780e024eabc48b67ca68a2f8a0c594b753/playgrounds/flatConfig/eslint.config.js
+        // TODO https://stackoverflow.com/questions/74237042/how-to-correctly-configure-the-parser-plugins-with-eslints-new-flat-config
         'plugin:@typescript-eslint/recommended-type-checked',
         // https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/src/configs/stylistic-type-checked.ts
         'plugin:@typescript-eslint/stylistic-type-checked',
@@ -110,7 +115,7 @@ module.exports = {
         // https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/eslint-plugin/docs/rules
         // https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/src/configs/recommended-type-checked.ts
         // https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/src/configs/stylistic-type-checked.ts
-        '@typescript-eslint/array-type': ['error', { default: 'array'}],
+        '@typescript-eslint/array-type': ['error', { default: 'array' }],
         '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
         '@typescript-eslint/consistent-type-exports': 'error',
         '@typescript-eslint/consistent-type-imports': 'error',
@@ -153,10 +158,10 @@ module.exports = {
             },
         ],
         '@typescript-eslint/no-base-to-string': ['error', {
-            ignoredTypeNames: ['RegExp', 'boolean']
+            ignoredTypeNames: ['RegExp', 'boolean'],
         }],
         '@typescript-eslint/no-confusing-void-expression': ['error', {
-            ignoreArrowShorthand: true
+            ignoreArrowShorthand: true,
         }],
         '@typescript-eslint/no-dupe-class-members': 'error',
         '@typescript-eslint/no-dynamic-delete': 'error',
@@ -165,7 +170,7 @@ module.exports = {
         }],
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-floating-promises': ['error', {
-            ignoreIIFE: true
+            ignoreIIFE: true,
         }],
         '@typescript-eslint/no-invalid-this': 'error',
         '@typescript-eslint/no-invalid-void-type': 'error',
@@ -251,7 +256,7 @@ module.exports = {
 
         // https://github.com/jest-community/eslint-plugin-jest/blob/main/src/index.ts
         'jest/no-conditional-in-test': 'error',
-        'jest/consistent-test-it':['error', {
+        'jest/consistent-test-it': ['error', {
             fn: 'test',
             withinDescribe: 'test',
         }],
@@ -312,7 +317,7 @@ module.exports = {
 
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/configs/recommended.js
         'unicorn/catch-error-name': ['error', {
-            name: 'err'
+            name: 'err',
         }],
         'unicorn/consistent-function-scoping': 'error',
         'unicorn/custom-error-definition': 'error',
@@ -378,7 +383,7 @@ module.exports = {
         }],
         'max-params': 'error',
         'max-statements': ['error', {
-            max: 25
+            max: 25,
         }],
         'no-alert': 'error',
         'no-array-constructor': 'error',
