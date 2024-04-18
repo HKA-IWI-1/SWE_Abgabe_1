@@ -22,6 +22,7 @@
 import asciidoctor from '@asciidoctor/core'
 // https://github.com/eshepelyuk/asciidoctor-plantuml.js ist deprecated
 import kroki from 'asciidoctor-kroki';
+// eslint-disable-next-line unicorn/import-style
 import { join } from 'node:path';
 import url from 'node:url';
 
