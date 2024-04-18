@@ -20,10 +20,8 @@
 import { type PrettyOptions } from 'pino-pretty';
 import { config } from './app.js';
 import { env } from './env.js';
-import { nodeConfig } from './node.js';
+import path from 'node:path';
 import pino from 'pino';
-// eslint-disable-next-line unicorn/import-style
-import { resolve } from 'node:path';
 
 /**
  * Das Modul enthält die Konfiguration für den Logger.
@@ -32,12 +30,9 @@ import { resolve } from 'node:path';
 
 const logDirDefault = 'log';
 const logFileNameDefault = 'server.log';
-const logFileDefault = resolve(logDirDefault, logFileNameDefault);
-const { log } = config;
-const { nodeEnv } = nodeConfig;
+const logFileDefault = path.resolve(logDirDefault, logFileNameDefault);
 
-export const loggerDefaultValue =
-    env.LOG_DEFAULT?.toLowerCase() === 'true' || log?.default === true;
+const { log } = config;
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const logDir: string | undefined =
@@ -45,38 +40,35 @@ const logDir: string | undefined =
         ? undefined
         : log.dir.trimEnd(); // eslint-disable-line @typescript-eslint/no-unsafe-call
 const logFile =
-    logDir === undefined ? logFileDefault : resolve(logDir, logFileNameDefault);
+    logDir === undefined
+        ? logFileDefault
+        : path.resolve(logDir, logFileNameDefault);
 const pretty = log?.pretty === true;
 
-let logLevel = 'info';
-if (
-    log?.level === 'debug' &&
-    nodeEnv !== 'production' &&
-    nodeEnv !== 'PRODUCTION' &&
-    !loggerDefaultValue
-) {
-    logLevel = 'debug';
+type LogLevel = 'error' | 'warn' | 'info' | 'debug';
+let logLevelTmp: LogLevel = 'info';
+if (env.LOG_LEVEL !== undefined) {
+    logLevelTmp = env.LOG_LEVEL as LogLevel;
+} else if (log?.level !== undefined) {
+    logLevelTmp = log?.level as LogLevel;
 }
+export const logLevel = logLevelTmp;
 
-if (!loggerDefaultValue) {
-    console.debug(
-        `logger config: logLevel=${logLevel}, logFile=${logFile}, pretty=${pretty}, loggerDefaultValue=${loggerDefaultValue}`,
-    );
-}
+console.debug(
+    `logger config: logLevel=${logLevel}, logFile=${logFile}, pretty=${pretty}`,
+);
 
 const fileOptions = {
     level: logLevel,
     target: 'pino/file',
     options: { destination: logFile },
 };
-
 const prettyOptions: PrettyOptions = {
     translateTime: 'SYS:standard',
     singleLine: true,
     colorize: true,
     ignore: 'pid,hostname',
 };
-
 const prettyTransportOptions = {
     level: logLevel,
     target: 'pino-pretty',
@@ -90,9 +82,10 @@ const options: pino.TransportMultiOptions | pino.TransportSingleOptions = pretty
     : {
           targets: [fileOptions],
       };
-
+// type-coverage:ignore-next-line
 const transports = pino.transport(options); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
 
-export const parentLogger: pino.Logger<string> = loggerDefaultValue
-    ? pino(pino.destination(logFileDefault))
-    : pino({ level: logLevel }, transports); // eslint-disable-line @typescript-eslint/no-unsafe-argument
+export const parentLogger: pino.Logger<string> =
+    logLevel === 'info'
+        ? pino(pino.destination(logFileDefault))
+        : pino({ level: logLevel }, transports); // eslint-disable-line @typescript-eslint/no-unsafe-argument

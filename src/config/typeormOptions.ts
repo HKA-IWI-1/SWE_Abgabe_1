@@ -26,10 +26,10 @@ import {
     OracleNamingStrategy,
     SnakeNamingStrategy,
 } from './typeormNamingStrategy.js';
-// import { Film } from '../SWE_ABGABE_1/entity/film.entity.js';
 import { type DataSourceOptions } from 'typeorm';
+import { Film } from '../film/entity/film.entity.js';
 import { dbType } from './db.js';
-// import { entities } from '../SWE_ABGABE_1/entity/entities.js';
+import { entities } from '../film/entity/entities.js';
 import { logLevel } from './logger.js';
 import { nodeConfig } from './node.js';
 import path from 'node:path';
@@ -38,11 +38,11 @@ import { readFileSync } from 'node:fs';
 const { db } = config;
 
 // nullish coalescing
-// const database = (db?.name as string | undefined) ?? Film.name.toLowerCase();
+const database = (db?.name as string | undefined) ?? Film.name.toLowerCase();
 
 const host = (db?.host as string | undefined) ?? 'localhost';
-//  const username =
-//    (db?.username as string | undefined) ?? Film.name.toLowerCase();
+const username =
+    (db?.username as string | undefined) ?? Film.name.toLowerCase();
 const pass = (db?.password as string | undefined) ?? 'p';
 const passAdmin = (db?.passwordAdmin as string | undefined) ?? 'p';
 
