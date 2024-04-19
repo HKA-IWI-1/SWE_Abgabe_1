@@ -17,37 +17,34 @@
  *
  */
 
-import {
-    type MiddlewareConsumer,
-    Module,
-    type NestModule,
-} from '@nestjs/common';
-import { type ApolloDriverConfig } from '@nestjs/apollo';
-import { FilmModule } from './film/film.module';
-import { GraphQLModule } from '@nestjs/graphql';
-import { KeycloakModule } from './security/keycloak/keycloak.module.js';
-import { LoggerModule } from './logger/logger.module.js';
-import { RequestLoggerMiddleware } from './logger/request-logger.middleware.js';
+// todo: implement Get- and WriteController, Mutation- and QueryResolver, MailModule
+import { FilmReadService } from './service/film-read.service.js';
+import { FilmWriteService } from './service/film-write.service.js';
+import { KeycloakModule } from '../security/keycloak/keycloak.module.js';
+import { Module } from '@nestjs/common';
+import { QueryBuilder } from './service/query-builder.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { graphQlModuleOptions } from './config/graphql.js';
-import { typeOrmModuleOptions } from './config/typeormOptions.js';
+import { entities } from './entity/entities.js';
 
+/**
+ * Das Modul besteht aus Controller- und Service-Klassen für die Verwaltung von
+ * Filmen.
+ * @packageDocumentation
+ */
+
+/**
+ * Die dekorierte Modul-Klasse mit Controller- und Service-Klassen sowie der
+ * Funktionalität für TypeORM.
+ */
 @Module({
-    imports: [
-        // todo: admin module, dev module
-        FilmModule,
-        GraphQLModule.forRoot<ApolloDriverConfig>(graphQlModuleOptions),
-        LoggerModule,
-        KeycloakModule,
-        TypeOrmModule.forRoot(typeOrmModuleOptions),
+    imports: [KeycloakModule, TypeOrmModule.forFeature(entities)], // todo: add MailModule
+    controllers: [], // todo: insert controllers
+    providers: [
+        FilmReadService,
+        FilmWriteService,
+        // todo: Query und Mutation Resolver
+        QueryBuilder,
     ],
+    exports: [FilmReadService, FilmWriteService],
 })
-export class AppModule implements NestModule {
-    configure(consumer: MiddlewareConsumer) {
-        consumer.apply(RequestLoggerMiddleware).forRoutes(
-            // todo: Get- und WriteController hinzufügen
-            'auth',
-            'graphql',
-        );
-    }
-}
+export class FilmModule {}
