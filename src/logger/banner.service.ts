@@ -42,7 +42,7 @@ export class BannerService implements OnApplicationBootstrap {
      */
     onApplicationBootstrap() {
         const { host, nodeEnv, port } = nodeConfig;
-        figlet('buch', (_, data) => console.info(data));
+        figlet('film', (_, data) => console.info(data));
         this.#logger.info('Node: %s', process.version);
         this.#logger.info('NODE_ENV: %s', nodeEnv);
         this.#logger.info('Rechnername: %s', host);
