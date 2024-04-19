@@ -38,7 +38,7 @@ import {
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { ProduktionsstudioDTO } from './produktionsstudioDTO.entity.js';
-import { ProduzentDTO } from './produzentDTO.js';
+import { ProduzentDTO } from './produzentDTO.entity.js';
 import { StreamingAnbieter } from '../entity/film.entity.js';
 import { Type } from 'class-transformer';
 

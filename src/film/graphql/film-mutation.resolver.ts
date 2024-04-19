@@ -4,7 +4,7 @@ import { AuthGuard, Roles } from 'nest-keycloak-connect';
 import { IsInt, IsNumberString, Min } from 'class-validator';
 import { UseFilters, UseGuards, UseInterceptors } from '@nestjs/common';
 import { type Film } from '../entity/film.entity.js';
-import { FilmDTO } from '../rest/filmDTO.js';
+import { FilmDTO } from '../rest/filmDTO.entity.js';
 import { FilmWriteService } from '../service/film-write.service.js';
 import { HttpExceptionFilter } from './http-exception.filter.js';
 import { type IdInput } from './film-query.resolver.js';
