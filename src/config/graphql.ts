@@ -19,7 +19,6 @@
 
 import { ApolloDriver, type ApolloDriverConfig } from '@nestjs/apollo';
 import { BASEDIR } from './app.js';
-// eslint-disable-next-line unicorn/import-style
 import { join } from 'node:path';
 
 const schemaGraphQL = join(
