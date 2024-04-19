@@ -30,7 +30,7 @@
 --     cd .extras\compose\db\postgres
 --     docker compose exec db bash
 --        chown postgres:postgres /var/lib/postgresql/tablespace
---        chown postgres:postgres /var/lib/postgresql/tablespace/buch
+--        chown postgres:postgres /var/lib/postgresql/tablespace/film
 --        chown postgres:postgres /var/lib/postgresql/key.pem
 --        chown postgres:postgres /var/lib/postgresql/certificate.crt
 --        chmod 400 /var/lib/postgresql/key.pem

@@ -26,10 +26,10 @@ import {
     adminDataSourceOptions,
     dbPopulate,
     dbResourcesDir,
-} from '../typeormOptions';
+} from '../typeormOptions.js';
 import { DataSource } from 'typeorm';
 import { InjectDataSource } from '@nestjs/typeorm';
-import { dbType } from '../db';
+import { dbType } from '../db.js';
 import { getLogger } from '../../logger/logger.js';
 import path from 'node:path';
 import { readFileSync } from 'node:fs';
@@ -110,7 +110,7 @@ export class DbPopulateService implements OnApplicationBootstrap {
             `SET search_path TO ${adminDataSourceOptions!.database};`,
         );
         const copyStmt =
-            "COPY %TABELLE% FROM '/csv/%TABELLE%.csv' (FORMAT csv, DELIMITER ';', HEADER true);"; // todo eslint disablen
+            'COPY %TABELLE% FROM \'/csv/%TABELLE%.csv\' (FORMAT csv, DELIMITER \';\', HEADER true);'; // todo eslint disablen
         for (const tabelle of this.#tabellen) {
             // eslint-disable-next-line unicorn/prefer-string-replace-all
             await dataSource.query(copyStmt.replace(/%TABELLE%/gu, tabelle));
@@ -152,4 +152,5 @@ export class DbPopulateService implements OnApplicationBootstrap {
         }
     }
 }
+
 /* eslint-enable @stylistic/quotes */

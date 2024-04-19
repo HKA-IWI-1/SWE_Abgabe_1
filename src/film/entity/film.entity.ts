@@ -28,7 +28,7 @@ import {
     VersionColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { DecimalTransformer } from './decimal-transformer';
+import { DecimalTransformer } from './decimal-transformer.js';
 import { Produktionsstudio } from './produktionsstudio.entity.js';
 import { Produzent } from './produzent.entity.js';
 import { dbType } from '../../config/db.js';

@@ -18,11 +18,11 @@
  */
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { BadUserInputError } from '../../film/graphql/errors.js';
-import { KeycloakService } from './keycloak.service';
+import { KeycloakService } from './keycloak.service.js';
 import { Public } from 'nest-keycloak-connect';
-import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor';
+import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
 import { UseInterceptors } from '@nestjs/common';
-import { getLogger } from '../../logger/logger';
+import { getLogger } from '../../logger/logger.js';
 
 export interface LoginInput {
     /** Username */

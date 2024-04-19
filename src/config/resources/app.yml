@@ -46,7 +46,7 @@ keycloak:
 #authServerUrl: http://localhost:8080
 #realm: acme
 # see Keycloak menu point "Clients" > tab "Clients list" > column "Client ID"
-#clientId: film-client
+#clientId: buch-client
 #tokenValidation: online
 
 # ==============================================================================

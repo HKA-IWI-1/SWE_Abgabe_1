@@ -22,7 +22,7 @@
  * @packageDocumentation
  */
 
-import { MailService } from './mail.service';
+import { MailService } from './mail.service.js';
 import { Module } from '@nestjs/common';
 
 /**
