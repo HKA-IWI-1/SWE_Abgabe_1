@@ -37,7 +37,7 @@ export class Produzent {
     @Column()
     readonly nachname!: string;
 
-    @ManyToOne(() => Film, (film) => film.produzent)
+    @ManyToOne(() => Film, (film) => film.produzenten)
     @JoinColumn({ name: 'film_id' })
     film: Film | undefined;
 

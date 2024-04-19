@@ -51,6 +51,9 @@ export class Film {
     @VersionColumn()
     readonly version: number | undefined;
 
+    @Column('varchar')
+    readonly titel: string | undefined;
+
     @Column('int')
     @ApiProperty({ example: 5, type: Number })
     readonly bewertung: number | undefined;
@@ -75,6 +78,13 @@ export class Film {
     @ApiProperty({ example: '2021-01-31' })
     readonly veroeffentlichungsdatum: Date | string | undefined;
 
+    @Column('varchar')
+    @ApiProperty({
+        example: 'https://www.imdb.com/title/tt0073486/',
+        type: String,
+    })
+    readonly imdbEintrag: string | undefined;
+
     @CreateDateColumn({
         type: dbType === 'sqlite' ? 'datetime' : 'timestamp',
     })
@@ -86,7 +96,7 @@ export class Film {
     readonly aktualisiert: Date | undefined;
 
     @Column('simple-array')
-    genre: string[] | null | undefined;
+    genres: string[] | null | undefined;
 
     @Column('varchar')
     @ApiProperty({ example: 'NETFLIX', type: String })
@@ -104,12 +114,7 @@ export class Film {
     @OneToMany(() => Produzent, (produzent) => produzent.film, {
         cascade: ['insert', 'remove'],
     })
-    readonly produzent: Produzent[] | undefined;
-
-    /**
-     * Produktionsstudio 1:1
-     *
-     */
+    readonly produzenten: Produzent[] | undefined;
 
     public toString = () =>
         JSON.stringify({
@@ -121,7 +126,8 @@ export class Film {
             erzeugt: this.erzeugt,
             aktualisiert: this.aktualisiert,
             bewertung: this.bewertung,
-            genre: this.genre,
+            genres: this.genres,
             streamingAnbieter: this.anbieter,
+            imdbEintrag: this.imdbEintrag,
         });
 }
