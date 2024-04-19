@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 - present Juergen Zimmermann, Florian Goebel, Hochschule Karlsruhe
+ * Copyright (C) 2024 - Adrian Spindler Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,9 @@ import { KeycloakModule } from '../../security/keycloak/keycloak.module.js';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+/**
+ * Module imports für TypeOrm etc.
+ */
 @Module({
     imports: [KeycloakModule, TypeOrmModule.forFeature([Film])],
     controllers: [DevController],
