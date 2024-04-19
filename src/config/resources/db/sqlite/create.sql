@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS film (
     imdbEintrag                 TEXT,
     erzeugt                     TEXT NOT NULL,
     aktualisiert                TEXT NOT NULL,
+    genres                      TEXT,
     anbieter                    TEXT
 );
 CREATE INDEX IF NOT EXISTS film_titel_idx ON film(titel);
