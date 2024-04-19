@@ -127,7 +127,7 @@ export class Film {
             aktualisiert: this.aktualisiert,
             bewertung: this.bewertung,
             genres: this.genres,
-            streamingAnbieter: this.anbieter,
+            anbieter: this.anbieter,
             imdbEintrag: this.imdbEintrag,
         });
 }

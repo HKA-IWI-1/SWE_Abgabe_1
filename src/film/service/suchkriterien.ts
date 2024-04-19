@@ -34,6 +34,6 @@ export interface Suchkriterien {
     readonly rabatt?: number;
     readonly veroeffentlichungsdatum?: string;
     readonly bewertung?: number;
-    readonly streamingAnbieter?: StreamingAnbieter;
+    readonly anbieter?: StreamingAnbieter;
     readonly imdbEintrag?: string;
 }
