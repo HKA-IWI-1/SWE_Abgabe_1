@@ -37,9 +37,9 @@ import {
     ValidateNested,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { ProduktionsstudioDTO } from './produktionsstudioDTO';
-import { ProduzentDTO } from './produzentDTO';
-import { StreamingAnbieter } from '../entity/film.entity';
+import { ProduktionsstudioDTO } from './produktionsstudioDTO.entity.js';
+import { ProduzentDTO } from './produzentDTO.js';
+import { StreamingAnbieter } from '../entity/film.entity.js';
 import { Type } from 'class-transformer';
 
 export const MAX_RATING = 5;
