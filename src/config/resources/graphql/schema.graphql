@@ -1,0 +1,123 @@
+schema {
+    query: Query 
+    mutation: Mutation 
+}
+
+"Funktionen, um Filmdaten zu lesen"
+type Query {
+    filme(suchkriterien: SuchkriterienInput): [Film!]
+
+    film(id: ID!): Film
+}
+
+"Funktionen, um Filme neu anzulegen, zu aktualisieren und zu löschen"
+type Mutation {
+    create(input: FilmInput!): CreatePayload
+
+    update(input: FilmUpdateInput!): UpdatePayload
+
+    delete(id: ID!): Boolean
+
+    login(username: String!, password: String!): LoginResult
+    refresh(refresh_token: String!): LoginResult
+}
+
+"Daten zum Produktionsstudio eines Films"
+type Produktionsstudio {
+    name: String!
+}
+
+"Daten zu den Produzenten des Films"
+type Produzent {
+    vorname: String!
+    nachname: String!
+}
+
+"Datenschema zu einem Film, welcher gelesen wird"
+type Film {
+    id: Int!
+    version: Int!
+    titel: String!
+    bewertung: Int!
+    preis: Float!
+    veroeffentlichungsdatum: String
+    imdbEintrag: String!
+    genres: [String]
+    anbieter: StreamingAnbieter
+    # 1:1-Beziehunug
+    produktionsstudio: Produktionsstudio!
+    # field mit @ResolveField    
+    rabatt(short: Boolean): String!
+}
+
+enum StreamingAnbieter {
+    NETFLIX
+    AMAZON
+    PARAMOUNT
+    DISNEY
+}
+
+"Suchkriterien für Filme"
+input SuchkriterienInput {
+    produktionsstudio: String
+    titel: String
+    imdbEintrag: String
+    bewertung: Int
+    anbieter: StreamingAnbieter
+}
+
+"Daten zum Produktionsstudio eines Films"
+input ProduktionsstudioInput {
+    name: String!
+}
+
+"Daten zu den Produzenten des Films"
+input ProduzentInput {
+    vorname: String!
+    nachname: String!
+}
+
+"Daten für einen neuen Film"
+input FilmInput {
+    titel: String
+    bewertung: Int
+    preis: Float
+    rabatt: Float
+    veroeffentlichungsdatum: String
+    imdbEintrag: String
+    genres: [String]
+    anbieter: StreamingAnbieter
+    produktionsstudio: Produktionsstudio!
+    produzenten: [ProduzentInput!]
+}
+
+type CreatePayload {
+    id: Int
+}
+
+"Daten für ein zu ändernden Film"
+input FilmUpdateInput {
+    id: Int
+    version: Int
+    titel: String
+    bewertung: Int
+    preis: Float
+    rabatt: Float
+    veroeffentlichungsdatum: String
+    imdbEintrag: String
+    genres: [String]
+    anbieter: StreamingAnbieter
+}
+
+type UpdatePayload {
+    version: int
+}
+
+type LoginResult {
+    access_token: String!
+    expires_in: Int!
+    refresh_token: String!
+    refresh_expires_in: Int!
+    roles: [String!]
+
+}
