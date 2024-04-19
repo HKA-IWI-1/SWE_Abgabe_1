@@ -28,14 +28,14 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import {
     VersionInvalidException,
     VersionOutdatedException,
-} from './exceptions';
+} from './exceptions.js';
 import { Film } from '../entity/film.entity.js';
-import { FilmReadService } from './film-read.service';
+import { FilmReadService } from './film-read.service.js';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MailService } from '../../mail/mail.service';
-import { Produktionsstudio } from '../entity/produktionsstudio.entity';
-import { Produzent } from '../entity/produzent.entity';
-import { getLogger } from '../../logger/logger';
+import { MailService } from '../../mail/mail.service.js';
+import { Produktionsstudio } from '../entity/produktionsstudio.entity.js';
+import { Produzent } from '../entity/produzent.entity.js';
+import { getLogger } from '../../logger/logger.js';
 
 /** Typdefinitionen zum Aktualisieren eines Filmes mit `update`. */
 export interface UpdateParams {

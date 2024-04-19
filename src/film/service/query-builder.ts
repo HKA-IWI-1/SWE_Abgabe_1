@@ -26,7 +26,7 @@ import { Film } from '../entity/film.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { Produktionsstudio } from '../entity/produktionsstudio.entity.js';
-import { Produzent } from '../entity/produzent.entity';
+import { Produzent } from '../entity/produzent.entity.js';
 import { Repository } from 'typeorm';
 import { type Suchkriterien } from './suchkriterien.js';
 import { getLogger } from '../../logger/logger.js';

@@ -18,9 +18,9 @@
  */
 
 // todo: implement Mutation- and QueryResolver
-import { FilmGetController } from './rest/film-get.controller';
+import { FilmGetController } from './rest/film-get.controller.js';
 import { FilmReadService } from './service/film-read.service.js';
-import { FilmWriteController } from './rest/film-write.controller';
+import { FilmWriteController } from './rest/film-write.controller.js';
 import { FilmWriteService } from './service/film-write.service.js';
 import { KeycloakModule } from '../security/keycloak/keycloak.module.js';
 import { MailModule } from '../mail/mail.module.js';
