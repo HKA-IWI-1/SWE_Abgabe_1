@@ -4,46 +4,53 @@ ALTER ROLE film SET search_path = 'film';
 
 CREATE TYPE streaminganbieter as ENUM ('NETFLIX', 'AMAZON', 'PARAMOUNT', 'DISNEY');
 
-CREATE TABLE IF NOT EXISTS film(
+CREATE TABLE IF NOT EXISTS film
+(
 
-    id INTEGER GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE filmspace,
+    id                      INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE filmspace,
 
-    version INTEGER NOT NULL DEFAULT 0,
+    version                 INTEGER       NOT NULL DEFAULT 0,
 
-    bewertung INTEGER,
+    titel                   varchar(40)   NOT NULL,
 
-    preis DECIMAL(8,2) NOT NULL,
+    bewertung               INTEGER,
 
-    rabatt DECIMAL(4,3),
+    preis                   DECIMAL(8, 2) NOT NULL,
+
+    rabatt                  DECIMAL(4, 3),
 
     veroeffentlichungsdatum DATE,
 
-    erzeugt TIMESTAMP NOT NULL DEFAULT NOW(),
-    
-    aktualisiert TIMESTAMP NOT NULL DEFAULT NOW(),
+    imdb_eintrag             varchar(40),
 
-    genre VARCHAR(64),
-    
-    anbieter streaminganbieter
+    erzeugt                 TIMESTAMP     NOT NULL DEFAULT NOW(),
+
+    aktualisiert            TIMESTAMP     NOT NULL DEFAULT NOW(),
+
+    genres                   VARCHAR(64),
+
+    anbieter                streaminganbieter
 ) TABLESPACE filmspace;
 
-CREATE TABLE IF NOT EXISTS produktionsstudio(
-    
-    id INTEGER GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE filmspace,
+CREATE TABLE IF NOT EXISTS produktionsstudio
+(
 
-    name VARCHAR(40) NOT NULL,
+    id      INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE filmspace,
 
-    film_id INTEGER NOT NULL UNIQUE USING INDEX TABLESPACE filmspace REFERENCES film
+    name    VARCHAR(40) NOT NULL,
+
+    film_id INTEGER     NOT NULL UNIQUE USING INDEX TABLESPACE filmspace REFERENCES film
 ) TABLESPACE filmspace;
 
-CREATE TABLE IF NOT EXISTS produzent(
-    id INTEGER GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE filmspace,
+CREATE TABLE IF NOT EXISTS produzent
+(
+    id       INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE filmspace,
 
-    vorname VARCHAR(40) NOT NULL,
+    vorname  VARCHAR(40) NOT NULL,
 
     nachname VARCHAR(40) NOT NULL,
 
-    film_id INTEGER NOT NULL REFERENCES film
+    film_id  INTEGER     NOT NULL REFERENCES film
 ) TABLESPACE filmspace;
 
-CREATE INDEX IF NOT EXISTS produzent_film_id_idx ON produzent(film_id) TABLESPACE filmspace;
+CREATE INDEX IF NOT EXISTS produzent_film_id_idx ON produzent (film_id) TABLESPACE filmspace;

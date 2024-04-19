@@ -52,7 +52,7 @@ export class FilmDtoOhneRef {
     @Matches('^\\w.*')
     @MaxLength(MAX_TITEL)
     @ApiProperty({ example: 'Der Titel', type: String })
-    readonly titel: string | undefined;
+    readonly titel!: string;
 
     @IsInt()
     @Min(0)
