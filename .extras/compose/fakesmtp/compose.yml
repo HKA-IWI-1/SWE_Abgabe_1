@@ -12,6 +12,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+#
+# Aufruf Webinterface: http://localhost:5080/
 
 services:
   fakesmtp:
@@ -25,7 +28,7 @@ services:
         target: 8081
     volumes:
       - type: bind
-        source: /Users/floriansauer/Zimmermann/volumes/fakesmtp
+        source: C:/Zimmermann/volumes/volumes/fakesmtp
         target: /tmp
     environment:
       TZ: Europe/Berlin
@@ -44,3 +47,4 @@ services:
         reservations:
           cpus: '0.5'
           memory: 768M
+

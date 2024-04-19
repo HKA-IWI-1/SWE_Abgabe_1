@@ -17,10 +17,13 @@
  *
  */
 
-// todo: implement Get- and WriteController, Mutation- and QueryResolver, MailModule
+// todo: implement Mutation- and QueryResolver
+import { FilmGetController } from './rest/film-get.controller';
 import { FilmReadService } from './service/film-read.service.js';
+import { FilmWriteController } from './rest/film-write.controller';
 import { FilmWriteService } from './service/film-write.service.js';
 import { KeycloakModule } from '../security/keycloak/keycloak.module.js';
+import { MailModule } from '../mail/mail.module.js';
 import { Module } from '@nestjs/common';
 import { QueryBuilder } from './service/query-builder.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -37,8 +40,8 @@ import { entities } from './entity/entities.js';
  * Funktionalität für TypeORM.
  */
 @Module({
-    imports: [KeycloakModule, TypeOrmModule.forFeature(entities)], // todo: add MailModule
-    controllers: [], // todo: insert controllers
+    imports: [KeycloakModule, MailModule, TypeOrmModule.forFeature(entities)],
+    controllers: [FilmGetController, FilmWriteController], // todo: insert controllers
     providers: [
         FilmReadService,
         FilmWriteService,

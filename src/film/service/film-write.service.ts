@@ -32,6 +32,7 @@ import {
 import { Film } from '../entity/film.entity.js';
 import { FilmReadService } from './film-read.service';
 import { InjectRepository } from '@nestjs/typeorm';
+import { MailService } from '../../mail/mail.service';
 import { Produktionsstudio } from '../entity/produktionsstudio.entity';
 import { Produzent } from '../entity/produzent.entity';
 import { getLogger } from '../../logger/logger';
