@@ -41,7 +41,7 @@ import { entities } from './entity/entities.js';
  */
 @Module({
     imports: [KeycloakModule, MailModule, TypeOrmModule.forFeature(entities)],
-    controllers: [FilmGetController, FilmWriteController], // todo: insert controllers
+    controllers: [FilmGetController, FilmWriteController],
     providers: [
         FilmReadService,
         FilmWriteService,
