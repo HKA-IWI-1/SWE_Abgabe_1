@@ -35,7 +35,7 @@ export class Produktionsstudio {
     readonly name!: string;
 
     @OneToOne(() => Film, (film) => film.produktionsstudio)
-    @JoinColumn({ name: 'produktionsstudio_id' })
+    @JoinColumn({ name: 'film_id' })
     film: Film | undefined;
 
     public toString = (): string =>
