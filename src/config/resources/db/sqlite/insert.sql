@@ -29,7 +29,7 @@ INSERT INTO film(id, version, titel, bewertung, preis, rabatt, veroeffentlichung
 INSERT INTO film(id, version, titel, bewertung, preis, rabatt, veroeffentlichungsdatum, imdbEintrag, erzeugt, aktualisiert, genres, anbieter) VALUES
    (4,0,'Best of HKA',5,40.44,0.044,'2024-04-04','https://www.imdb.com/title/sl0472437/','2024-04-04 00:00:00','2024-04-04 00:00:00','Komödie','DISNEY');
 INSERT INTO film(id, version, titel, bewertung, preis, rabatt, veroeffentlichungsdatum, imdbEintrag, erzeugt, aktualisiert, genres, anbieter) VALUES
-   (5,0,'Der fliegende PC',4,50.55,0.055,'2024-05-05','https://www.imdb.com/title/sl0472572/','2024-05-05 00:00:00','2024-05-05 00:00:00','Science-Fiction','Netflix');
+   (5,0,'Der fliegende PC',4,50.55,0.055,'2024-05-05','https://www.imdb.com/title/sl0472572/','2024-05-05 00:00:00','2024-05-05 00:00:00','Science-Fiction','NETFLIX');
 
 INSERT INTO produktionsstudio(id, name, film_id) VALUES
     (1,'Constantin Film',1);
