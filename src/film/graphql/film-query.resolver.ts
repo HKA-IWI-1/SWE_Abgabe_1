@@ -21,6 +21,7 @@ export interface SuchkriterienInput {
 @UseInterceptors(ResponseTimeInterceptor)
 export class FilmQueryResolver {
     readonly #service: FilmReadService;
+
     readonly #logger = getLogger(FilmQueryResolver.name);
 
     constructor(service: FilmReadService) {
@@ -49,7 +50,7 @@ export class FilmQueryResolver {
     async find(@Args() input: SuchkriterienInput | undefined) {
         this.#logger.debug('find: input=%o', input);
         const filme = await this.#service.find(input?.suchkriterien);
-        this.#logger.debug('find: buecher=%o', filme);
+        this.#logger.debug('find: filme=%o', filme);
         return filme;
     }
 
