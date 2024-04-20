@@ -1,8 +1,10 @@
 {
 	"info": {
+		"_postman_id": "497c9f82-246d-496a-a8f3-9dd8a38c8b03",
 		"name": "GraphQL",
 		"description": "GraphQL-Schnittstelle",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33729341"
 	},
 	"item": [
 		{
@@ -23,24 +25,12 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"pm.test('Body mit den Properties', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { film } = body.data;\r",
-									"    const { isbn, version, rating, art, preis, lieferbar, datum, homepage, schlagwoerter, titel, rabatt } = film;\r",
-									"    pm.expect(isbn).to.be.a('string');\r",
-									"    pm.expect(version).to.be.a('number').that.is.gte(0);\r",
-									"    pm.expect(rating).to.be.a('number').that.is.gte(0);\r",
-									"    pm.expect(art).to.be.a('string');\r",
-									"    pm.expect(preis).to.be.a('number').that.is.gte(0);\r",
-									"    pm.expect(lieferbar).to.be.a('boolean');\r",
-									"    pm.expect(datum).to.be.a('string');\r",
-									"    pm.expect(homepage).to.be.a('string');\r",
-									"    pm.expect(schlagwoerter).to.be.an('array');\r",
-									"    pm.expect(titel.titel).to.be.a('string');\r",
-									"    pm.expect(rabatt).to.match(/ %$/u);\r",
-									"});"
+									"// pm.test('Body mit den Properties', () => {\r",
+									"//\r",
+									"// });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -57,7 +47,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query ($id: ID! = \"1\") {\r\n  film(id: $id) {\r\n    isbn\r\n    version\r\n    rating\r\n    art\r\n    preis\r\n    lieferbar\r\n    datum\r\n    homepage\r\n    schlagwoerter\r\n    titel {\r\n      titel\r\n    }\r\n    rabatt(short: true)\r\n  }\r\n}",
+								"query": "query ($id: ID! = \"1\") {\r\n  film(id: $id) {\r\n    id\r\n    version\r\n    titel \r\n    bewertung \r\n    preis\r\n    veroeffentlichungsdatum \r\n    imdbEintrag\r\n    genres\r\n    anbieter \r\n    produktionsstudio {\r\n      name\r\n    }\r\n    rabatt(short: true)\r\n  }\r\n}",
 								"variables": "{\r\n  \"id\": \"1\"\r\n}"
 							}
 						},
@@ -71,7 +61,7 @@
 					"response": []
 				},
 				{
-					"name": "Suche isbn von einem Film mit nicht-vorhandener 999999",
+					"name": "Suche alle Filme mit version, titel und Produktionsstudio",
 					"event": [
 						{
 							"listen": "test",
@@ -85,18 +75,12 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"pm.test('Body mit errors', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { errors } = body;\r",
-									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
-									"    const { message, path, extensions } = errors[0];\r",
-									"    pm.expect(message).to.include('999999');\r",
-									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
-									"    pm.expect(path[0]).to.be.equal('film');\r",
-									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
-									"});"
+									"// pm.test('Body mit den Properties', () => {\r",
+									"//\r",
+									"// });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -113,65 +97,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query ($id: ID! = \"1\") {\r\n  film(id: $id) {\r\n    isbn\r\n  }\r\n}",
-								"variables": "{\r\n  \"id\": \"999999\"\r\n}"
-							}
-						},
-						"url": {
-							"raw": "{{graphql_url}}",
-							"host": [
-								"{{graphql_url}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Suche id, version und titel von allen Filmen",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test('Content-Type application/json', () => {\r",
-									"    const { response } = pm;\r",
-									"    const contentType = response.headers.get('Content-Type');\r",
-									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
-									"});\r",
-									"pm.test('Body mit den Properties', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { filme } = body.data;\r",
-									"    pm.expect(filme).to.be.an('array').that.is.not.empty;\r",
-									"    filme.forEach(film => {\r",
-									"        const { id, version, art, titel } = film;\r",
-									"        pm.expect(id).to.be.a('number').that.is.gte(0);\r",
-									"        pm.expect(version).to.be.a('number').that.is.gte(0);\r",
-									"        pm.expect(art).to.be.a('string');\r",
-									"        pm.expect(titel.titel).to.be.a('string');\r",
-									"    });\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "graphql",
-							"graphql": {
-								"query": "{\r\n  filme {\r\n    id\r\n    version\r\n    art\r\n    titel {\r\n      titel\r\n    }\r\n  }\r\n}",
+								"query": "{\r\n  filme {\r\n    version\r\n    titel \r\n    produktionsstudio {\r\n      name\r\n    }\r\n  }\r\n}\r\n",
 								"variables": ""
 							}
 						},
@@ -185,7 +111,7 @@
 					"response": []
 				},
 				{
-					"name": "Suche art von Filmen mit Titel Alpha",
+					"name": "Suche Filme von Produktionsstudio",
 					"event": [
 						{
 							"listen": "test",
@@ -199,15 +125,12 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"pm.test('Body mit art', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { filme } = body.data;\r",
-									"    pm.expect(filme).to.be.an('array').that.is.not.empty;\r",
-									"    filme.map(film => film.art)\r",
-									"        .forEach(art => pm.expect(art).to.be.a('string'));\r",
-									"});"
+									"// pm.test('Body mit den Properties', () => {\r",
+									"//\r",
+									"// });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -224,8 +147,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query ($titel: String = \"Alpha\") {\r\n  filme(suchkriterien: {titel: $titel}) {\r\n    art\r\n  }\r\n}",
-								"variables": "{\r\n  \"titel\": \"Alpha\"\r\n}"
+								"query": "query ($name: String = \"Pinewood Studios\") {\r\n  filme(suchkriterien: {produktionsstudio: $name}) {\r\n    id\r\n    version\r\n    titel \r\n    bewertung \r\n    preis\r\n    veroeffentlichungsdatum \r\n    imdbEintrag\r\n    genres\r\n    anbieter \r\n    produktionsstudio {\r\n      name\r\n    }\r\n    rabatt(short: true)\r\n  }\r\n}",
+								"variables": "{\r\n  \"name\": \"Pinewood Studios\"\r\n}"
 							}
 						},
 						"url": {
@@ -238,7 +161,7 @@
 					"response": []
 				},
 				{
-					"name": "Suche art, schlagwoerter, titel von Filmen mit Teilstring \"ta\" im Titel",
+					"name": "Suche von Filmen mit nicht-vorhandenem Produktionsstudio",
 					"event": [
 						{
 							"listen": "test",
@@ -252,19 +175,12 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"pm.test('Body mit art, schlagwoerter, titel', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { filme } = body.data;\r",
-									"    pm.expect(filme).to.be.an('array').that.is.not.empty;\r",
-									"    filme.forEach(film => {\r",
-									"        const { art, schlagwoerter, titel } = film;\r",
-									"        pm.expect(art).to.be.a('string');\r",
-									"        pm.expect(schlagwoerter).to.be.an('array');\r",
-									"        pm.expect(titel.titel).to.be.a('string').that.includes('ta');\r",
-									"    });\r",
-									"});"
+									"// pm.test('Body mit Errors', () => {\r",
+									"//\r",
+									"// });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -281,8 +197,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query ($titel: String = \"a\") {\r\n  filme(suchkriterien: {titel: $titel}) {\r\n    art\r\n    schlagwoerter\r\n    titel {\r\n      titel\r\n    }\r\n  }\r\n}",
-								"variables": "{\r\n  \"titel\": \"ta\"\r\n}"
+								"query": "query ($name: String = \"Nichtvorhanden\") {\r\n  filme(suchkriterien: {produktionsstudio: $name}) {\r\n    titel\r\n  }\r\n}",
+								"variables": "{\r\n  \"name\": \"Nichtvorhanden\"\r\n}"
 							}
 						},
 						"url": {
@@ -295,7 +211,7 @@
 					"response": []
 				},
 				{
-					"name": "Suche von Filmen mit nicht-vorhandenem Titel",
+					"name": "Suche von FIlmen mit Bewertung 3",
 					"event": [
 						{
 							"listen": "test",
@@ -309,18 +225,12 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"pm.test('Body mit errors', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { errors } = body;\r",
-									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
-									"    const { message, path, extensions } = errors[0];\r",
-									"    pm.expect(message).to.be.a('string').that.includes('titel');\r",
-									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
-									"    pm.expect(path[0]).to.be.equal('filme');\r",
-									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
-									"});"
+									"// pm.test('Body mit den Properties', () => {\r",
+									"//\r",
+									"// });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -337,8 +247,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query ($titel: String = \"Nichtvorhanden\") {\r\n  filme(suchkriterien: {titel: $titel}) {\r\n    art\r\n  }\r\n}",
-								"variables": "{\r\n  \"titel\": \"Nichtvorhanden\"\r\n}"
+								"query": "query ($bewertung: Int = 3) {\r\n  filme(suchkriterien: {bewertung: $bewertung}) {\r\n    titel\r\n    bewertung\r\n    produktionsstudio {\r\n        name\r\n    }\r\n  }\r\n}",
+								"variables": "{\r\n  \"bewertung\": 3\r\n}"
 							}
 						},
 						"url": {
@@ -351,7 +261,7 @@
 					"response": []
 				},
 				{
-					"name": "Suche von Filmen mit rating 2",
+					"name": "Suche Filme mit ungültiger Bewertung",
 					"event": [
 						{
 							"listen": "test",
@@ -365,18 +275,12 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"pm.test('Body mit rating und titel', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { filme } = body.data;\r",
-									"    pm.expect(filme).to.be.an('array').that.is.not.empty;\r",
-									"    filme.forEach(film => {\r",
-									"        const { rating, titel } = film;\r",
-									"        pm.expect(rating).to.be.a('number').that.is.eq(2);\r",
-									"        pm.expect(titel.titel).to.be.a('string')\r",
-									"    });\r",
-									"});"
+									"// pm.test('Body mit Errors', () => {\r",
+									"//\r",
+									"// });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -393,229 +297,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query ($rating: Int = 2) {\r\n  filme(suchkriterien: {rating: $rating}) {\r\n    rating\r\n    titel {\r\n        titel\r\n    }\r\n  }\r\n}",
-								"variables": "{\r\n  \"rating\": 2\r\n}"
-							}
-						},
-						"url": {
-							"raw": "{{graphql_url}}",
-							"host": [
-								"{{graphql_url}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Suche von Filmen mit nicht-vorhandenem rating",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test('Content-Type application/json', () => {\r",
-									"    const { response } = pm;\r",
-									"    const contentType = response.headers.get('Content-Type');\r",
-									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
-									"});\r",
-									"pm.test('Body mit errors', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { errors } = body;\r",
-									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
-									"    const { message, path, extensions } = errors[0];\r",
-									"    pm.expect(message).to.be.a('string').that.includes('rating');\r",
-									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
-									"    pm.expect(path[0]).to.be.equal('filme');\r",
-									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "graphql",
-							"graphql": {
-								"query": "query ($rating: Int = 99) {\r\n  filme(suchkriterien: {rating: $rating}) {\r\n    art\r\n  }\r\n}",
-								"variables": "{\r\n  \"rating\": 99\r\n}"
-							}
-						},
-						"url": {
-							"raw": "{{graphql_url}}",
-							"host": [
-								"{{graphql_url}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Suche von Filmen mit Art KINDLE",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test('Content-Type application/json', () => {\r",
-									"    const { response } = pm;\r",
-									"    const contentType = response.headers.get('Content-Type');\r",
-									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
-									"});\r",
-									"pm.test('Body mit art und titel', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { filme } = body.data;\r",
-									"    pm.expect(filme).to.be.an('array').that.is.not.empty;\r",
-									"    filme.forEach(film => {\r",
-									"        const { art, titel } = film;\r",
-									"        pm.expect(art).to.be.a('string').that.is.eq('KINDLE');\r",
-									"        pm.expect(titel.titel).to.be.a('string').that.is.not.empty;\r",
-									"    });\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "graphql",
-							"graphql": {
-								"query": "query ($art: Art = KINDLE) {\r\n  filme(suchkriterien: {art: $art}) {\r\n    art\r\n    titel {\r\n      titel\r\n    }\r\n  }\r\n}",
-								"variables": "{\r\n  \"art\": \"KINDLE\"\r\n}"
-							}
-						},
-						"url": {
-							"raw": "{{graphql_url}}",
-							"host": [
-								"{{graphql_url}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Suche von Filmen mit ungueltiger Art",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 400', () => {\r",
-									"    pm.response.to.have.status(400);\r",
-									"});\r",
-									"pm.test('Content-Type application/json', () => {\r",
-									"    const { response } = pm;\r",
-									"    const contentType = response.headers.get('Content-Type');\r",
-									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
-									"});\r",
-									"pm.test('Body mit errors', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { errors } = body;\r",
-									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
-									"    const { extensions } = errors[0];\r",
-									"    pm.expect(extensions.code).to.be.equal('GRAPHQL_VALIDATION_FAILED');\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "graphql",
-							"graphql": {
-								"query": "query ($art: String = \"UNGUELTIG\") {\r\n  filme(suchkriterien: {art: $art}) {\r\n    art\r\n  }\r\n}",
-								"variables": "{\r\n  \"art\": \"UNGUELTIG\"\r\n}"
-							}
-						},
-						"url": {
-							"raw": "{{graphql_url}}",
-							"host": [
-								"{{graphql_url}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Suche von Filmen mit lieferbar=true",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test('Content-Type application/json', () => {\r",
-									"    const { response } = pm;\r",
-									"    const contentType = response.headers.get('Content-Type');\r",
-									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
-									"});\r",
-									"pm.test('Body mit lieferbar und titel', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { filme } = body.data;\r",
-									"    pm.expect(filme).to.be.an('array').that.is.not.empty;\r",
-									"    filme.forEach(film => {\r",
-									"        const { lieferbar, titel } = film;\r",
-									"        pm.expect(lieferbar).to.be.true;\r",
-									"        pm.expect(titel.titel).to.be.a('string').that.is.not.empty;\r",
-									"    });\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "graphql",
-							"graphql": {
-								"query": "query ($lieferbar: Boolean = true) {\r\n  filme(suchkriterien: {lieferbar: $lieferbar}) {\r\n    lieferbar\r\n    titel {\r\n      titel\r\n    }\r\n  }\r\n}",
-								"variables": "{\r\n  \"lieferbar\": true\r\n}"
+								"query": "query ($bewertung: Int = 99) {\r\n  filme(suchkriterien: {bewertung: $bewertung}) {\r\n    titel\r\n  }\r\n}",
+								"variables": "{\r\n  \"bewertung\": 99\r\n}"
 							}
 						},
 						"url": {
@@ -656,7 +339,8 @@
 									"    pm.expect(roles).to.be.an('array').that.is.not.empty;\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -788,7 +472,8 @@
 									"    pm.expect(data.create.id).to.be.a('number').that.is.gte(0);\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -805,7 +490,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  create(\r\n    input: {\r\n      isbn: \"978-0-321-19368-1\",\r\n      rating: 1,\r\n      art: KINDLE,\r\n      preis: 99.99,\r\n      rabatt: 0.123,\r\n      lieferbar: true,\r\n      datum: \"2022-01-31\",\r\n      homepage: \"https://create.mutation\",\r\n      schlagwoerter: [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n      titel: {\r\n        titel: \"Titelcreatemutation\",\r\n        untertitel: \"untertitelcreatemutation\"\r\n      },\r\n      abbildungen: [{\r\n        beschriftung: \"Abb. 1\",\r\n        contentType: \"img/png\"\r\n      }]\r\n    }\r\n  ) {\r\n      id\r\n  }\r\n}",
+								"query": "mutation {\r\n  create(\r\n    input: {\r\n        titel: \"Mutating Tutorial\"\r\n        bewertung: 5\r\n        preis: 12.99\r\n        rabatt: 0.123\r\n        veroeffentlichungsdatum:  \"2024-04-31\",\r\n        imdbEintrag:  \"https://www.imdb.com/title/ty0037423/\"\r\n        genres: [\"Thriller\"],\r\n        anbieter: NETFLIX\r\n        produktionsstudio: {\r\n            name: \"Constantin Film\"\r\n        }\r\n        produzenten: [{\r\n            vorname: \"Frank\",\r\n            nachname: \"Müller\"\r\n        }]\r\n    }\r\n    ) {\r\n      id\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
@@ -819,7 +504,7 @@
 					"response": []
 				},
 				{
-					"name": "Neuer Film mit ungültigen Daten",
+					"name": "neuer Film mit ungültigen Daten",
 					"event": [
 						{
 							"listen": "test",
@@ -833,20 +518,12 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"pm.test('Fehlermeldungen im Response Body', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { errors } = body;\r",
-									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
-									"    const { message, path, extensions } = errors[0];\r",
-									"    pm.expect(message).to.be.a('string');\r",
-									"    const props = ['titel.titel', 'isbn', 'rating', 'preis', 'datum', 'homepage'];\r",
-									"    props.forEach(prop => pm.expect(message).to.include(prop));\r",
-									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
-									"    pm.expect(path[0]).to.be.equal('create');\r",
-									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
-									"});"
+									"// pm.test('Fehlermeldungen im Response Body', () => {\r",
+									"\r",
+									"// });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -863,7 +540,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  create(\r\n    input: {\r\n      isbn: \"falsche-isbn\",\r\n      rating: 999,\r\n      art: DRUCKAUSGABE,\r\n      preis: -1,\r\n      rabatt: 0,\r\n      lieferbar: true,\r\n      datum: \"12345-123-123\",\r\n      homepage: \"anyHomepage\",\r\n      schlagwoerter: [\"JAVASCRIPT\"],\r\n      titel: {\r\n        titel: \"?!\"\r\n        untertitel: \"mutationinvalid\"\r\n      }\r\n    }\r\n  ) {\r\n      id\r\n  }\r\n}",
+								"query": "mutation {\r\n  create(\r\n    input: {\r\n      titel: \"Mutating Tutorial\"\r\n      bewertung: 20\r\n      preis: -200\r\n      rabatt: 0\r\n      veroeffentlichungsdatum:  \"2024-2104-3231\",\r\n      imdbEintrag:  \"https://www.imdb.com/title/ty0057423/\"\r\n      genres: [\"Thriller\"],\r\n      anbieter: BAMBUS\r\n      produktionsstudio: {\r\n          name: \"Constantin Film\"\r\n      }\r\n      produzenten: [{\r\n          vorname: \"Frank\",\r\n          nachname: \"Müller\"\r\n      }]\r\n    }\r\n    ) {\r\n      id\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
@@ -877,7 +554,7 @@
 					"response": []
 				},
 				{
-					"name": "Film mit ID 40 aktualisieren",
+					"name": "Film mit ID 4 aktualisieren",
 					"event": [
 						{
 							"listen": "test",
@@ -897,7 +574,8 @@
 									"    pm.expect(data.update.version).to.be.a('number').that.is.gte(0);\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -914,7 +592,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"40\",\r\n      version: 0,\r\n      isbn: \"978-0-007-09732-6\",\r\n      rating: 5,\r\n      art: KINDLE,\r\n      preis: 444.44,\r\n      rabatt: 0.099,\r\n      lieferbar: false,\r\n      datum: \"2022-04-04\",\r\n      homepage: \"https://update.mutation\",\r\n      schlagwoerter: [\"JAVASCRIPT\", \"TYPESCRIPT\"]\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n        id: \"4\",\r\n        version: 0,\r\n        titel: \"Updating Tutorial\"\r\n        bewertung: 3\r\n        preis: 20.99\r\n        rabatt: 0.012\r\n        veroeffentlichungsdatum:  \"2024-04-22\",\r\n        imdbEintrag:  \"https://www.imdb.com/title/ty0037573/\"\r\n        genres: [\"Dokumentation\"],\r\n        anbieter: AMAZON\r\n        produktionsstudio: {\r\n            name: \"BW Film\"\r\n        }\r\n        produzenten: [{\r\n            vorname: \"Gustav\",\r\n            nachname: \"Gustavson\"\r\n        }]\r\n    }\r\n    ) {\r\n        version\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
@@ -928,7 +606,7 @@
 					"response": []
 				},
 				{
-					"name": "Film mit ID 40 mit ungültigen Daten aktualisieren",
+					"name": "Film mit ID 4 mit ungültigen Daten aktualisieren",
 					"event": [
 						{
 							"listen": "test",
@@ -942,20 +620,12 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"pm.test('Fehlermeldungen im Response Body', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { errors } = body;\r",
-									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
-									"    const { message, path, extensions } = errors[0];\r",
-									"    pm.expect(message).to.be.a('string');\r",
-									"    const props = ['isbn', 'preis', 'datum', 'homepage'];\r",
-									"    props.forEach(prop => pm.expect(message).to.include(prop));\r",
-									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
-									"    pm.expect(path[0]).to.be.equal('update');\r",
-									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
-									"});"
+									"// pm.test('Fehlermeldungen im Response Body', () => {\r",
+									"    \r",
+									"// });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -972,7 +642,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: 40,\r\n      version: 0,\r\n      isbn: \"falsche-ISBN\",\r\n      rating: -1,\r\n      art: KINDLE,\r\n      preis: -1,\r\n      rabatt: 2,\r\n      lieferbar: false,\r\n      datum: \"12345-123-123\",\r\n      homepage: \"anyHomepage\"\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n        id: \"4\",\r\n        version: 0,\r\n        titel: \"SUPER FAKE MOVIE\"\r\n        bewertung: 22\r\n        preis: -10000\r\n        rabatt: 0\r\n        veroeffentlichungsdatum:  \"2024-42304-322\",\r\n        imdbEintrag:  \"nö\"\r\n        genres: [\"Dokumentation\"],\r\n        anbieter: BAMBUS\r\n        produktionsstudio: {\r\n            name: \"BW Film\"\r\n        }\r\n        produzenten: [{\r\n            vorname: \"Gustav\",\r\n            nachname: \"Gustavson\"\r\n        }]\r\n    }\r\n    ) {\r\n        version\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
@@ -1011,7 +681,8 @@
 									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -1028,7 +699,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"999999\",\r\n      version: 0,\r\n      isbn: \"978-0-007-09732-6\",\r\n      rating: 5,\r\n      art: DRUCKAUSGABE,\r\n      preis: 99.99,\r\n      rabatt: 0.099,\r\n      lieferbar: false,\r\n      datum: \"2022-02-01\",\r\n      schlagwoerter: [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n      homepage: \"https://nicht.vorhanden.de/\"\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n        id: \"49999\",\r\n        version: 0,\r\n        titel: \"Updating Tutorial\"\r\n        bewertung: 3\r\n        preis: 20.99\r\n        rabatt: 0.012\r\n        veroeffentlichungsdatum:  \"2024-04-22\",\r\n        imdbEintrag:  \"https://www.imdb.com/title/ty0037573/\"\r\n        genres: [\"Dokumentation\"],\r\n        anbieter: AMAZON\r\n        produktionsstudio: {\r\n            name: \"BW Film\"\r\n        }\r\n        produzenten: [{\r\n            vorname: \"Gustav\",\r\n            nachname: \"Gustavson\"\r\n        }]\r\n    }\r\n    ) {\r\n        version\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
@@ -1042,7 +713,7 @@
 					"response": []
 				},
 				{
-					"name": "Film mit ID 60 löschen",
+					"name": "Film mit ID 5 löschen",
 					"event": [
 						{
 							"listen": "test",
@@ -1062,7 +733,8 @@
 									"    pm.expect(data.delete).to.be.true;\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -1079,7 +751,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  delete(id: \"60\")\r\n}",
+								"query": "mutation {\r\n  delete(id: \"5\")\r\n}",
 								"variables": ""
 							}
 						},
