@@ -97,7 +97,7 @@ type CreatePayload {
 
 "Daten für ein zu ändernden Film"
 input FilmUpdateInput {
-    id: Int
+    id: ID
     version: Int
     titel: String
     bewertung: Int

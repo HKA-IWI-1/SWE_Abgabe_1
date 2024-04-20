@@ -490,7 +490,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  create(\r\n    input: {\r\n        titel: \"Mutating Tutorial\"\r\n        bewertung: 5\r\n        preis: 12.99\r\n        rabatt: 0.123\r\n        veroeffentlichungsdatum:  \"2024-04-31\",\r\n        imdbEintrag:  \"https://www.imdb.com/title/ty0037423/\"\r\n        genres: [\"Thriller\"],\r\n        anbieter: NETFLIX\r\n        produktionsstudio: {\r\n            name: \"Constantin Film\"\r\n        }\r\n        produzenten: [{\r\n            vorname: \"Frank\",\r\n            nachname: \"Müller\"\r\n        }]\r\n    }\r\n    ) {\r\n      id\r\n  }\r\n}",
+								"query": "mutation {\r\n  create(\r\n    input: {\r\n        titel: \"Mutating Tutorial\"\r\n        bewertung: 5\r\n        preis: 12.99\r\n        rabatt: 0.123\r\n        veroeffentlichungsdatum:  \"2024-04-29\",\r\n        imdbEintrag:  \"https://www.imdb.com/title/ty0037423/\"\r\n        genres: [\"Thriller\"],\r\n        anbieter: NETFLIX\r\n        produktionsstudio: {\r\n            name: \"Constantin Film\"\r\n        }\r\n        produzenten: [{\r\n            vorname: \"Frank\",\r\n            nachname: \"Müller\"\r\n        }]\r\n    }\r\n    ) {\r\n      id\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
@@ -592,7 +592,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  update(\r\n    input: {\r\n        id: \"4\",\r\n        version: 0,\r\n        titel: \"Updating Tutorial\"\r\n        bewertung: 3\r\n        preis: 20.99\r\n        rabatt: 0.012\r\n        veroeffentlichungsdatum:  \"2024-04-22\",\r\n        imdbEintrag:  \"https://www.imdb.com/title/ty0037573/\"\r\n        genres: [\"Dokumentation\"],\r\n        anbieter: AMAZON\r\n        produktionsstudio: {\r\n            name: \"BW Film\"\r\n        }\r\n        produzenten: [{\r\n            vorname: \"Gustav\",\r\n            nachname: \"Gustavson\"\r\n        }]\r\n    }\r\n    ) {\r\n        version\r\n  }\r\n}",
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n        id: 4,\r\n        version: 0,\r\n        titel: \"Updating Tutorial\"\r\n        bewertung: 3\r\n        preis: 20.99\r\n        rabatt: 0.012\r\n        veroeffentlichungsdatum:  \"2024-04-22\",\r\n        imdbEintrag:  \"https://www.imdb.com/title/ty0037573/\"\r\n        genres: [\"Dokumentation\"],\r\n        anbieter: AMAZON\r\n    }\r\n    ) {\r\n        version\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
@@ -699,7 +699,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  update(\r\n    input: {\r\n        id: \"49999\",\r\n        version: 0,\r\n        titel: \"Updating Tutorial\"\r\n        bewertung: 3\r\n        preis: 20.99\r\n        rabatt: 0.012\r\n        veroeffentlichungsdatum:  \"2024-04-22\",\r\n        imdbEintrag:  \"https://www.imdb.com/title/ty0037573/\"\r\n        genres: [\"Dokumentation\"],\r\n        anbieter: AMAZON\r\n        produktionsstudio: {\r\n            name: \"BW Film\"\r\n        }\r\n        produzenten: [{\r\n            vorname: \"Gustav\",\r\n            nachname: \"Gustavson\"\r\n        }]\r\n    }\r\n    ) {\r\n        version\r\n  }\r\n}",
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n        id: \"49999\",\r\n        version: 0,\r\n        titel: \"Updating Tutorial\"\r\n        bewertung: 3\r\n        preis: 20.99\r\n        rabatt: 0.012\r\n        veroeffentlichungsdatum:  \"2024-04-22\",\r\n        imdbEintrag:  \"https://www.imdb.com/title/ty0037573/\"\r\n        genres: [\"Dokumentation\"],\r\n        anbieter: AMAZON\r\n    }\r\n    ) {\r\n        version\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
