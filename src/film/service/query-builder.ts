@@ -97,7 +97,17 @@ export class QueryBuilder {
      * @param suchkriterien JSON-Objekt mit Suchkriterien
      * @returns QueryBuilder
      */
-    build({ produktionsstudio, ...props }: Suchkriterien) {
+    // eslint-disable-next-line max-lines-per-function,sonarjs/cognitive-complexity,max-statements
+    build({
+        titel,
+        produktionsstudio,
+        thriller,
+        scienceFiction,
+        geschichte,
+        komoedie,
+        dokumentation,
+        ...props
+    }: Suchkriterien) {
         this.#logger.debug('build: titel=%s, props=%o', props);
 
         let queryBuilder = this.#repo.createQueryBuilder(this.#filmAlias);
@@ -110,7 +120,16 @@ export class QueryBuilder {
 
         let useWhere = true;
 
-        // type-coverage:ignore-next-line
+        if (titel !== undefined && typeof titel === 'string') {
+            const ilike =
+                typeOrmModuleOptions.type === 'postgres' ? 'ilike' : 'like';
+            queryBuilder = queryBuilder.where(
+                `${this.#filmAlias}.titel ${ilike} :titel`,
+                { titel: `%${titel}%` },
+            );
+            useWhere = false;
+        }
+
         if (
             produktionsstudio !== undefined &&
             typeof produktionsstudio === 'string'
@@ -119,8 +138,63 @@ export class QueryBuilder {
                 typeOrmModuleOptions.type === 'postgres' ? 'ilike' : 'like';
             queryBuilder = queryBuilder.where(
                 `${this.#produktionsstudioAlias}.name ${ilike} :name`,
-                { produktionsstudio: `%${produktionsstudio}%` },
+                { name: `%${produktionsstudio}%` },
             );
+            useWhere = false;
+        }
+
+        if (thriller === 'true') {
+            queryBuilder = useWhere
+                ? queryBuilder.where(
+                      `${this.#filmAlias}.genres like '%THRILLER%'`,
+                  )
+                : queryBuilder.andWhere(
+                      `${this.#filmAlias}.genres like '%THRILLER%'`,
+                  );
+            useWhere = false;
+        }
+
+        if (dokumentation === 'true') {
+            queryBuilder = useWhere
+                ? queryBuilder.where(
+                      `${this.#filmAlias}.genres like '%DOKUMENTATION%'`,
+                  )
+                : queryBuilder.andWhere(
+                      `${this.#filmAlias}.genres like '%DOKUMENTATION%'`,
+                  );
+            useWhere = false;
+        }
+
+        if (geschichte === 'true') {
+            queryBuilder = useWhere
+                ? queryBuilder.where(
+                      `${this.#filmAlias}.genres like '%GESCHICHTE%'`,
+                  )
+                : queryBuilder.andWhere(
+                      `${this.#filmAlias}.genres like '%GESCHICHTE%'`,
+                  );
+            useWhere = false;
+        }
+
+        if (komoedie === 'true') {
+            queryBuilder = useWhere
+                ? queryBuilder.where(
+                      `${this.#filmAlias}.genres like '%KOMOEDIE%'`,
+                  )
+                : queryBuilder.andWhere(
+                      `${this.#filmAlias}.genres like '%KOMOEDIE%'`,
+                  );
+            useWhere = false;
+        }
+
+        if (scienceFiction === 'true') {
+            queryBuilder = useWhere
+                ? queryBuilder.where(
+                      `${this.#filmAlias}.genres like '%SCIENCEFICTION%'`,
+                  )
+                : queryBuilder.andWhere(
+                      `${this.#filmAlias}.genres like '%SCIENCEFICTION%'`,
+                  );
             useWhere = false;
         }
 

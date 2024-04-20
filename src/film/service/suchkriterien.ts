@@ -36,4 +36,9 @@ export interface Suchkriterien {
     readonly bewertung?: number;
     readonly anbieter?: StreamingAnbieter;
     readonly imdbEintrag?: string;
+    readonly thriller?: string;
+    readonly dokumentation?: string;
+    readonly geschichte?: string;
+    readonly komoedie?: string;
+    readonly scienceFiction?: string;
 }

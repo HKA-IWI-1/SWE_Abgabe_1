@@ -19,6 +19,8 @@
 
 // todo: implement Mutation- and QueryResolver
 import { FilmGetController } from './rest/film-get.controller.js';
+import { FilmMutationResolver } from './graphql/film-mutation.resolver.js';
+import { FilmQueryResolver } from './graphql/film-query.resolver.js';
 import { FilmReadService } from './service/film-read.service.js';
 import { FilmWriteController } from './rest/film-write.controller.js';
 import { FilmWriteService } from './service/film-write.service.js';
@@ -45,7 +47,8 @@ import { entities } from './entity/entities.js';
     providers: [
         FilmReadService,
         FilmWriteService,
-        // todo: Query und Mutation Resolver
+        FilmMutationResolver,
+        FilmQueryResolver,
         QueryBuilder,
     ],
     exports: [FilmReadService, FilmWriteService],

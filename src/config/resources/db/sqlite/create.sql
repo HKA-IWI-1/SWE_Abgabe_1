@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS film (
     preis                       REAL,
     rabatt                      REAL,
     veroeffentlichungsdatum     TEXT,
-    imdbEintrag                 TEXT,
+    imdb_eintrag                TEXT,
     erzeugt                     TEXT NOT NULL,
     aktualisiert                TEXT NOT NULL,
     genres                      TEXT,

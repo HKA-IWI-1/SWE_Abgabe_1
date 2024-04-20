@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "14742597-c961-4163-b3b9-be3ac64e0aec",
+		"name": "Admin",
+		"description": "Administrative Aufgaben, z.B. Abfragen zu Liveness und Readiness",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32397580"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"item": [
+				{
+					"name": "Liveness",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test('Content-Type application/json', () => {",
+									"    const { response } = pm;",
+									"    const contentType = response.headers.get('Content-Type');",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);",
+									"});",
+									"pm.test('Status im Body ueberpruefen', () => {",
+									"    const body = pm.response.json();",
+									"    const { status, info, error } = body",
+									"    pm.expect(status).to.be.equal('ok');",
+									"    pm.expect(info.appserver.status).to.be.equal('up');",
+									"    pm.expect(error).to.be.an('object').that.is.empty;",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{health_url}}/liveness",
+							"host": [
+								"{{health_url}}"
+							],
+							"path": [
+								"liveness"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Readiness",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test('Content-Type application/json', () => {",
+									"    const { response } = pm;",
+									"    const contentType = response.headers.get('Content-Type');",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);",
+									"});",
+									"pm.test('Status im Body ueberpruefen', () => {",
+									"    const body = pm.response.json();",
+									"    const { status, info, error } = body",
+									"    pm.expect(status).to.be.equal('ok');",
+									"    pm.expect(info.db.status).to.be.equal('up');",
+									"    pm.expect(error).to.be.an('object').that.is.empty;",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{health_url}}/readiness",
+							"host": [
+								"{{health_url}}"
+							],
+							"path": [
+								"readiness"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Abfragen zu Liveness und Readiness für z.B. Kubernetes."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "health_url",
+			"value": "{{base_url}}/health",
+			"type": "string"
+		}
+	]
+}

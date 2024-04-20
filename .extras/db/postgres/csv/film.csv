@@ -1,0 +1,6 @@
+id;version;titel;bewertung;preis;rabatt;veroeffentlichungsdatum;imdbEintrag;erzeugt;aktualisiert;genres;anbieter
+1;0;Software Thriller;4;10.11;0.011;2024-01-01;https://www.imdb.com/title/ty0094486/;2024-01-01 00:00:00;2024-01-01 00:00:00;THRILLER;NETFLIX
+2;0;Tier Doku;3;20.22;0.022;2024-01-02;https://www.imdb.com/title/ab0098486/;2024-01-02 00:00:00;2024-01-02 00:00:00;DOKUMENTATION;AMAZON
+3;0;Architektur 2;1;30.33;0.044;2024-01-03;https://www.imdb.com/title/dj0098437/;2024-01-03 00:00:00;2024-01-03 00:00:00;DOKUMENTATION,GESCHICHTE;PARAMOUNT
+4;0;Best of HKA;5;40.44;0.044;2024-01-04;https://www.imdb.com/title/sl0472437/;2024-01-04 00:00:00;2024-01-04 00:00:00;KOMOEDIE;DISNEY
+5;0;Der fliegende PC;4;50.55;0.055;2024-01-05;https://www.imdb.com/title/sl0472572/;2024-01-05 00:00:00;2024-01-05 00:00:00;SCIENCEFICTION;NETFLIX
