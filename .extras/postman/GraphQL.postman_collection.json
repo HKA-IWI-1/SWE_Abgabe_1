@@ -25,9 +25,23 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"// pm.test('Body mit den Properties', () => {\r",
-									"//\r",
-									"// });"
+									"pm.test('Body mit den Properties', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { film } = body.data;\r",
+									"    const { version, titel, bewertung, preis, veroeffentlichungsdatum, \r",
+									"        imdbEintrag, genres, anbieter, produktionsstudio,\r",
+									"         rabatt } = film;\r",
+									"    pm.expect(version).to.be.a('number').that.is.gte(0);\r",
+									"    pm.expect(titel).to.be.a('string');\r",
+									"    pm.expect(bewertung).to.be.a('number').that.is.gte(0);\r",
+									"    pm.expect(preis).to.be.a('number').that.is.gte(0);\r",
+									"    pm.expect(veroeffentlichungsdatum).to.be.a('string');\r",
+									"    pm.expect(imdbEintrag).to.be.a('string');\r",
+									"    pm.expect(genres).to.be.an('array');\r",
+									"    pm.expect(anbieter).to.be.a('string');\r",
+									"    pm.expect(produktionsstudio.name).to.be.a('string');\r",
+									"    pm.expect(rabatt).to.match(/ %$/u);\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -47,7 +61,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query ($id: ID! = \"1\") {\r\n  film(id: $id) {\r\n    id\r\n    version\r\n    titel \r\n    bewertung \r\n    preis\r\n    veroeffentlichungsdatum \r\n    imdbEintrag\r\n    genres\r\n    anbieter \r\n    produktionsstudio {\r\n      name\r\n    }\r\n    rabatt(short: true)\r\n  }\r\n}",
+								"query": "query ($id: ID! = \"1\") {\r\n  film(id: $id) {\r\n    version\r\n    titel \r\n    bewertung \r\n    preis\r\n    veroeffentlichungsdatum \r\n    imdbEintrag\r\n    genres\r\n    anbieter \r\n    produktionsstudio {\r\n      name\r\n    }\r\n    rabatt(short: true)\r\n  }\r\n}",
 								"variables": "{\r\n  \"id\": \"1\"\r\n}"
 							}
 						},
@@ -75,9 +89,18 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"// pm.test('Body mit den Properties', () => {\r",
-									"//\r",
-									"// });"
+									"pm.test('Body mit den Properties', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { filme } = body.data;\r",
+									"    pm.expect(filme).to.be.an('array').that.is.not.empty;\r",
+									"    filme.forEach(film => {\r",
+									"        const { id, version, titel, produktionsstudio } = film;\r",
+									"        pm.expect(id).to.be.a('number').that.is.gte(0);\r",
+									"        pm.expect(version).to.be.a('number').that.is.gte(0);\r",
+									"        pm.expect(titel).to.be.a('string');\r",
+									"        pm.expect(produktionsstudio.name).to.be.a('string');\r",
+									"    });\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -97,7 +120,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "{\r\n  filme {\r\n    version\r\n    titel \r\n    produktionsstudio {\r\n      name\r\n    }\r\n  }\r\n}\r\n",
+								"query": "{\r\n  filme {\r\n    id\r\n    version\r\n    titel \r\n    produktionsstudio {\r\n      name\r\n    }\r\n  }\r\n}\r\n",
 								"variables": ""
 							}
 						},
@@ -125,9 +148,26 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"// pm.test('Body mit den Properties', () => {\r",
-									"//\r",
-									"// });"
+									"pm.test('Body mit den Properties', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { filme } = body.data;\r",
+									"    pm.expect(filme).to.be.an('array').that.is.not.empty;\r",
+									"    filme.forEach(film => {\r",
+									"        const { id, version, titel, bewertung, preis,\r",
+									"    veroeffentlichungsdatum, imdbEintrag, genres, anbieter, \r",
+									"    produktionsstudio, rabatt } = film;\r",
+									"        pm.expect(version).to.be.a('number').that.is.gte(0);\r",
+									"        pm.expect(titel).to.be.a('string');\r",
+									"        pm.expect(bewertung).to.be.a('number').that.is.gte(0);\r",
+									"        pm.expect(preis).to.be.a('number').that.is.gte(0);\r",
+									"        pm.expect(veroeffentlichungsdatum).to.be.a('string');\r",
+									"        pm.expect(imdbEintrag).to.be.a('string');\r",
+									"        pm.expect(genres).to.be.an('array');\r",
+									"        pm.expect(anbieter).to.be.a('string');\r",
+									"        pm.expect(produktionsstudio.name).to.be.a('string');\r",
+									"        pm.expect(rabatt).to.match(/ %$/u);\r",
+									"    });\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -175,9 +215,16 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"// pm.test('Body mit Errors', () => {\r",
-									"//\r",
-									"// });"
+									"pm.test('Body mit Errors', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const { message, path, extensions } = errors[0];\r",
+									"    pm.expect(message).to.be.a('string').that.includes('produktionsstudio');\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('filme');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -225,9 +272,17 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"// pm.test('Body mit den Properties', () => {\r",
-									"//\r",
-									"// });"
+									"pm.test('Body mit den Properties', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { filme } = body.data;\r",
+									"    pm.expect(filme).to.be.an('array').that.is.not.empty;\r",
+									"    filme.forEach(film => {\r",
+									"        const { titel, bewertung, produktionsstudio } = film;\r",
+									"        pm.expect(titel).to.be.a('string');\r",
+									"        pm.expect(bewertung).to.be.a('number').that.is.equal(3);\r",
+									"        pm.expect(produktionsstudio.name).to.be.a('string');\r",
+									"    });\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -275,9 +330,16 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"// pm.test('Body mit Errors', () => {\r",
-									"//\r",
-									"// });"
+									"pm.test('Body mit Errors', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const { message, path, extensions } = errors[0];\r",
+									"    pm.expect(message).to.be.a('string').that.includes('bewertung');\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('filme');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -518,9 +580,18 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"// pm.test('Fehlermeldungen im Response Body', () => {\r",
-									"\r",
-									"// });"
+									"pm.test('Fehlermeldungen im Response Body', () => {\r",
+									"const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const { message, path, extensions } = errors[0];\r",
+									"    pm.expect(message).to.be.a('string');\r",
+									"    const props = ['bewertung', 'preis', 'veroeffentlichungsdatum'];\r",
+									"    props.forEach(prop => pm.expect(message).to.include(prop));\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('create');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -540,7 +611,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  create(\r\n    input: {\r\n      titel: \"Mutating Tutorial\"\r\n      bewertung: 20\r\n      preis: -200\r\n      rabatt: 0\r\n      veroeffentlichungsdatum:  \"2024-2104-3231\",\r\n      imdbEintrag:  \"https://www.imdb.com/title/ty0057423/\"\r\n      genres: [\"Thriller\"],\r\n      anbieter: BAMBUS\r\n      produktionsstudio: {\r\n          name: \"Constantin Film\"\r\n      }\r\n      produzenten: [{\r\n          vorname: \"Frank\",\r\n          nachname: \"Müller\"\r\n      }]\r\n    }\r\n    ) {\r\n      id\r\n  }\r\n}",
+								"query": "mutation {\r\n  create(\r\n    input: {\r\n      titel: \"Mutating Tutorial\"\r\n      bewertung: 20\r\n      preis: -200\r\n      rabatt: 0\r\n      veroeffentlichungsdatum:  \"2024-2104-3231\",\r\n      imdbEintrag:  \"https://www.imdb.com/title/ty0057423/\"\r\n      genres: [\"Thriller\"],\r\n      anbieter: NETFLIX\r\n      produktionsstudio: {\r\n          name: \"Constantin Film\"\r\n      }\r\n      produzenten: [{\r\n          vorname: \"Frank\",\r\n          nachname: \"Müller\"\r\n      }]\r\n    }\r\n    ) {\r\n      id\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
@@ -620,9 +691,18 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"// pm.test('Fehlermeldungen im Response Body', () => {\r",
-									"    \r",
-									"// });"
+									"pm.test('Fehlermeldungen im Response Body', () => {\r",
+									"const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const { message, path, extensions } = errors[0];\r",
+									"    pm.expect(message).to.be.a('string');\r",
+									"    const props = ['bewertung', 'preis', 'veroeffentlichungsdatum'];\r",
+									"    props.forEach(prop => pm.expect(message).to.include(prop));\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('update');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -642,7 +722,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  update(\r\n    input: {\r\n        id: \"4\",\r\n        version: 0,\r\n        titel: \"SUPER FAKE MOVIE\"\r\n        bewertung: 22\r\n        preis: -10000\r\n        rabatt: 0\r\n        veroeffentlichungsdatum:  \"2024-42304-322\",\r\n        imdbEintrag:  \"nö\"\r\n        genres: [\"Dokumentation\"],\r\n        anbieter: BAMBUS\r\n        produktionsstudio: {\r\n            name: \"BW Film\"\r\n        }\r\n        produzenten: [{\r\n            vorname: \"Gustav\",\r\n            nachname: \"Gustavson\"\r\n        }]\r\n    }\r\n    ) {\r\n        version\r\n  }\r\n}",
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n        id: \"4\",\r\n        version: 0,\r\n        titel: \"SUPER FAKE MOVIE\"\r\n        bewertung: 22\r\n        preis: -10000\r\n        rabatt: 0\r\n        veroeffentlichungsdatum:  \"2024-42304-322\",\r\n        imdbEintrag:  \"nö\"\r\n        genres: [\"Dokumentation\"],\r\n        anbieter: NETFLIX\r\n    }\r\n    ) {\r\n        version\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
@@ -675,7 +755,7 @@
 									"    const { errors } = body;\r",
 									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
 									"    const { message, path, extensions } = errors[0];\r",
-									"    pm.expect(message).to.be.a('string').that.includes('999999');\r",
+									"    pm.expect(message).to.be.a('string').that.includes('49999');\r",
 									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
 									"    pm.expect(path[0]).to.be.equal('update');\r",
 									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
