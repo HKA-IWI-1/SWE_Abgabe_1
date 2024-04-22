@@ -494,7 +494,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n    login(username: \"admin\", password: \"FALSCH\") {\r\n        token\r\n    }\r\n}",
+								"query": "mutation {\r\n    login(username: \"admin\", password: \"FALSCH\") {\r\n        access_token\r\n    }\r\n}",
 								"variables": ""
 							}
 						},
