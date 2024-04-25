@@ -277,7 +277,6 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
-    // eslint-disable-next-line max-lines-per-function
     test('Nicht-vorhandenes Film aktualisieren', async () => {
         // given
         const token = await loginGraphQL(client);

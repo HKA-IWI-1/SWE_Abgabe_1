@@ -110,7 +110,7 @@ export class DbPopulateService implements OnApplicationBootstrap {
             `SET search_path TO ${adminDataSourceOptions!.database};`,
         );
         const copyStmt =
-            'COPY %TABELLE% FROM \'/csv/%TABELLE%.csv\' (FORMAT csv, DELIMITER \';\', HEADER true);'; // todo eslint disablen
+            'COPY %TABELLE% FROM \'/csv/%TABELLE%.csv\' (FORMAT csv, DELIMITER \';\', HEADER true);';
         for (const tabelle of this.#tabellen) {
             // eslint-disable-next-line unicorn/prefer-string-replace-all
             await dataSource.query(copyStmt.replace(/%TABELLE%/gu, tabelle));
