@@ -52,7 +52,7 @@ export class Film {
     readonly version: number | undefined;
 
     @Column('varchar')
-    readonly titel: string | undefined;
+    readonly titel!: string;
 
     @Column('int')
     @ApiProperty({ example: 5, type: Number })
@@ -129,5 +129,6 @@ export class Film {
             genres: this.genres,
             anbieter: this.anbieter,
             imdbEintrag: this.imdbEintrag,
+            titel: this.titel,
         });
 }
