@@ -25,6 +25,10 @@ jobs:
         run: |
           npm run eslint
 
+      - name: Building Asciidcotor documentation
+        run: |
+          npm run asciidoctor
+
       - name: Build
         run: |
           npm run build

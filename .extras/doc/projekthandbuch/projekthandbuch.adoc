@@ -49,7 +49,7 @@ Nulla porttitor accumsan tincidunt.
 .Use Cases
 [plantuml,use-cases,svg]
 ----
-include::use-cases.plantuml[]
+// include::use-cases.plantuml[]
 ----
 
 Quisque velit nisi, pretium ut lacinia in, elementum id enim.
@@ -58,7 +58,7 @@ Nulla porttitor accumsan tincidunt.
 .Komponentendiagramm
 [plantuml,komponenten,svg]
 ----
-include::komponenten.plantuml[]
+// include::komponenten.plantuml[]
 ----
 
 === Die REST-Schnittstelle
@@ -69,7 +69,7 @@ Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
 ."FilmGetController" für Lesezugriffe an der REST-Schnittstelle
 [plantuml,FilmGetController,svg]
 ----
-include::FilmGetController.plantuml[]
+// include::FilmGetController.plantuml[]
 ----
 
 Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.
@@ -78,7 +78,7 @@ Donec sollicitudin molestie malesuada.
 ."Sequenzdiagramm" mit den Methodenaufrufen
 [plantuml,sequenzdiagramm,svg]
 ----
-include::sequenzdiagramm.plantuml[]
+// include::sequenzdiagramm.plantuml[]
 ----
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut.
@@ -86,7 +86,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 ."FilmWriteController" für Schreibzugriffe an der REST-Schnittstelle
 [plantuml,FilmGetController,svg]
 ----
-include::FilmWriteController.plantuml[]
+// include::FilmWriteController.plantuml[]
 ----
 
 === Die GraphQL-Schnittstelle
@@ -97,7 +97,7 @@ Donec rutrum congue leo eget malesuada.
 .FilmQueryResolver für Lesezugriffe an der GraphQL-Schnittstelle
 [plantuml,FilmQueryResolver,svg]
 ----
-include::FilmQueryResolver.plantuml[]
+// include::FilmQueryResolver.plantuml[]
 ----
 
 Donec sollicitudin molestie malesuada.
@@ -106,7 +106,7 @@ Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
 .FilmMutationResolver für Schreibzugriffe an der GraphQL-Schnittstelle
 [plantuml,FilmMutationResolver,svg]
 ----
-include::FilmMutationResolver.plantuml[]
+// include::FilmMutationResolver.plantuml[]
 ----
 
 === Die Geschäftslogik
@@ -117,7 +117,7 @@ Donec rutrum congue leo eget malesuada.
 ."FilmReadService" von der Geschäftslogik
 [plantuml,FilmReadService,svg]
 ----
-include::FilmReadService.plantuml[]
+// include::FilmReadService.plantuml[]
 ----
 
 Pellentesque in ipsum id orci porta dapibus.
@@ -126,7 +126,7 @@ Donec rutrum congue leo eget malesuada.
 ."FilmWriteService" von der Geschäftslogik
 [plantuml,FilmWriteService,svg]
 ----
-include::FilmWriteService.plantuml[]
+// include::FilmWriteService.plantuml[]
 ----
 
 === Klasse für Entities
@@ -137,7 +137,7 @@ Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.
 .Entity
 [plantuml,Film,svg]
 ----
-include::Film.plantuml[]
+// include::Film.plantuml[]
 ----
 
 === ER-Diagramm
@@ -147,7 +147,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 .ER-Diagramm
 [plantuml,ER-Diagramm,svg]
 ----
-include::ER-Diagramm.plantuml[]
+// include::ER-Diagramm.plantuml[]
 ----
 
 == Programmierrichtlinien für TypeScript und JavaScript
