@@ -25,10 +25,9 @@ jobs:
         run: |
           npm run eslint
 
-# not yet working
-#      - name: Running tests
-#        run: |
-#          npm t
+      - name: Running tests
+        run: |
+          npm t
 
       - name: Build
         run: |
