@@ -97,7 +97,7 @@ Donec rutrum congue leo eget malesuada.
 .FilmQueryResolver für Lesezugriffe an der GraphQL-Schnittstelle
 [plantuml,FilmQueryResolver,svg]
 ----
-// include::FilmQueryResolver.plantuml[]
+include::FilmQueryResolver.plantuml[]
 ----
 
 Donec sollicitudin molestie malesuada.
