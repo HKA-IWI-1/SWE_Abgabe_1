@@ -25,31 +25,31 @@ INSERT INTO film(id, version, titel, bewertung, preis, rabatt,
                  genres, anbieter)
 VALUES (1, 0, 'Software Thriller', 4, 10.11, 0.011, '2024-01-01',
         'https://www.imdb.com/title/ty0094486/', '2024-01-01 00:00:00',
-        '2024-01-01 00:00:00', 'Thriller', 'NETFLIX');
+        '2024-01-01 00:00:00', 'THRILLER', 'NETFLIX');
 INSERT INTO film(id, version, titel, bewertung, preis, rabatt,
                  veroeffentlichungsdatum, imdb_eintrag, erzeugt, aktualisiert,
                  genres, anbieter)
 VALUES (2, 0, 'Tier Doku', 3, 20.22, 0.022, '2024-02-02',
         'https://www.imdb.com/title/ab0098486/', '2024-02-02 00:00:00',
-        '2024-02-02 00:00:00', 'Dokumentation', 'AMAZON');
+        '2024-02-02 00:00:00', 'DOKUMENTATION', 'AMAZON');
 INSERT INTO film(id, version, titel, bewertung, preis, rabatt,
                  veroeffentlichungsdatum, imdb_eintrag, erzeugt, aktualisiert,
                  genres, anbieter)
 VALUES (3, 0, 'Architektur 2', 1, 30.33, 0.033, '2024-03-03',
         'https://www.imdb.com/title/dj0098437/', '2024-03-03 00:00:00',
-        '2024-03-03 00:00:00', 'Dokumentation,Geschichte', 'PARAMOUNT');
+        '2024-03-03 00:00:00', 'DOKUMENTATION,GESCHICHTE', 'PARAMOUNT');
 INSERT INTO film(id, version, titel, bewertung, preis, rabatt,
                  veroeffentlichungsdatum, imdb_eintrag, erzeugt, aktualisiert,
                  genres, anbieter)
 VALUES (4, 0, 'Best of HKA', 5, 40.44, 0.044, '2024-04-04',
         'https://www.imdb.com/title/sl0472437/', '2024-04-04 00:00:00',
-        '2024-04-04 00:00:00', 'Komoedie', 'DISNEY');
+        '2024-04-04 00:00:00', 'KOMOEDIE', 'DISNEY');
 INSERT INTO film(id, version, titel, bewertung, preis, rabatt,
                  veroeffentlichungsdatum, imdb_eintrag, erzeugt, aktualisiert,
                  genres, anbieter)
 VALUES (5, 0, 'Der fliegende PC', 4, 50.55, 0.055, '2024-05-05',
         'https://www.imdb.com/title/sl0472572/', '2024-05-05 00:00:00',
-        '2024-05-05 00:00:00', 'scienceFiction', 'NETFLIX');
+        '2024-05-05 00:00:00', 'SCIENCEFICTION', 'NETFLIX');
 
 INSERT INTO produktionsstudio(id, name, film_id)
 VALUES (1, 'Constantin Film', 1);
