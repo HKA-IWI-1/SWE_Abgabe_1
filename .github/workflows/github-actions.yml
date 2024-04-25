@@ -21,14 +21,9 @@ jobs:
         run: |
           npm i
 
-# only temporary for faster GitHub Actions pipelines
-#      - name: Checking errors with ESLint
-#        run: |
-#          npm run eslint
-
-      - name: Running tests
+      - name: Checking errors with ESLint
         run: |
-          npm t
+          npm run eslint
 
       - name: Build
         run: |
