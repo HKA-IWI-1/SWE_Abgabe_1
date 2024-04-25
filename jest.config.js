@@ -50,11 +50,11 @@ const jestConfig = {
         ],
     },
 
-    // unix:
-    // testRegex: '__tests__\\.*/.*test\\.m?ts$',
+    // unix (e.g. for GitHub Actions)
+    testRegex: '__tests__\\.*/.*test\\.m?ts$',
 
     // windows:
-    testRegex: '__tests__\\.*\\\\.*test\\.m?ts$',
+    // testRegex: '__tests__\\.*\\\\.*test\\.m?ts$',
 
     collectCoverageFrom: ['<rootDir>/src/**/*.*ts'],
     // coverageDirectory: 'coverage',
