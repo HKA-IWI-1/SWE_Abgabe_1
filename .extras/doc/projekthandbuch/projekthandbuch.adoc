@@ -126,7 +126,7 @@ Donec rutrum congue leo eget malesuada.
 ."FilmWriteService" von der Geschäftslogik
 [plantuml,FilmWriteService,svg]
 ----
-// include::FilmWriteService.plantuml[]
+include::FilmWriteService.plantuml[]
 ----
 
 === Klasse für Entities
