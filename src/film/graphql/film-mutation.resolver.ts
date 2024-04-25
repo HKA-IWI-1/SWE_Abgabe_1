@@ -95,7 +95,7 @@ export class FilmMutationResolver {
     }
 
     @Mutation()
-    @Roles({ roles: ['admin', 'user'] })
+    @Roles({ roles: ['admin'] })
     async delete(@Args() id: IdInput) {
         const idStr = id.id;
         this.#logger.debug('delete: id=%s', idStr);
