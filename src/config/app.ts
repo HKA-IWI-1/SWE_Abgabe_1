@@ -24,6 +24,7 @@
 
 import { existsSync, readFileSync } from 'node:fs';
 import { load } from 'js-yaml';
+// eslint-disable-next-line unicorn/import-style
 import { resolve } from 'node:path';
 
 export const BASEDIR = existsSync('src') ? 'src' : 'dist';
