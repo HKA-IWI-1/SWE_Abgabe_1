@@ -106,7 +106,7 @@ Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
 .FilmMutationResolver für Schreibzugriffe an der GraphQL-Schnittstelle
 [plantuml,FilmMutationResolver,svg]
 ----
-// include::FilmMutationResolver.plantuml[]
+include::FilmMutationResolver.plantuml[]
 ----
 
 === Die Geschäftslogik
