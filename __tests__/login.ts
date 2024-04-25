@@ -19,6 +19,8 @@
 
 import { type AxiosInstance, type AxiosResponse } from 'axios';
 import { httpsAgent, loginPath } from './testserver.js';
+import { type GraphQLQuery } from './film/film-mutation.resolver.test';
+import { type GraphQLResponseBody } from './film/film-query.resolver.test';
 
 interface LoginResult {
     // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -42,4 +44,29 @@ export const loginRest = async (
         { headers, httpsAgent },
     );
     return response.data.access_token;
+};
+
+export const loginGraphQL = async (
+    axiosInstance: AxiosInstance,
+    username: string = usernameDefault,
+    password: string = passwordDefault,
+): Promise<string> => {
+    const body: GraphQLQuery = {
+        query: `
+            mutation {
+                login(
+                    username: "${username}",
+                    password: "${password}"
+                ) {
+                    access_token
+                }
+            }
+        `,
+    };
+
+    const response: AxiosResponse<GraphQLResponseBody> =
+        await axiosInstance.post('graphql', body, { httpsAgent });
+
+    const data = response.data.data!;
+    return data.login.access_token; // eslint-disable-line @typescript-eslint/no-unsafe-return
 };

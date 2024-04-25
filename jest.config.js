@@ -50,6 +50,9 @@ const jestConfig = {
         ],
     },
 
+    // unix
+    // testRegex: '__tests__\\.*/.*test\\.m?ts$',
+    // windows
     testRegex: '__tests__\\.*\\\\.*test\\.m?ts$',
     collectCoverageFrom: ['<rootDir>/src/**/*.*ts'],
     // coverageDirectory: 'coverage',
