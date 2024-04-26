@@ -1,0 +1,125 @@
+' Copyright (c) 2024 - present Florian Sauer
+'
+' Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+' documentation files (the “Software”), to deal in the Software without restriction, including without limitation the
+' rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+' permit persons to whom the Software is furnished to do so, subject to the following conditions:
+'
+' The above copyright notice and this permission notice shall be included in all copies or substantial portions
+' of the Software.
+'
+' THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+' LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+' IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+' WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+' SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+' Preview durch <Alt>d
+
+@startuml Controller-Klasse
+
+interface Promise<T>
+
+package @nestjs/common {
+  class "@Controller" as Controller
+  hide Controller circle
+
+  class "@UseGuards" as UseGuards
+  hide UseGuards circle
+
+  class "@UseInterceptors" as UseInterceptors
+  hide UseInterceptors circle
+
+  class "@Post" as Post
+  hide Post circle
+
+  class "@Put" as Put
+  hide Put circle
+
+  class "@Delete" as Delete
+  hide Delete circle
+
+  class "@Req" as Req
+  hide Req circle
+
+  class "@Res" as Res
+  hide Res circle
+
+  class "@Param" as Param
+  hide Param circle
+
+  class "@Body" as Body
+  hide Body circle
+
+  class "@Headers" as Headers
+  hide Headers circle
+
+  UseInterceptors .[hidden].> Post
+  UseInterceptors .[hidden].> Put
+  UseInterceptors .[hidden].> Delete
+
+  Post .[hidden].> Req
+  Post .[hidden].> Res
+  Post .[hidden].> Param
+  Post .[hidden].> Body
+  Post .[hidden].> Headers
+}
+
+package nest-keycloak-connect {
+  class AuthGuard
+
+  class "@Roles" as Roles
+  hide Roles circle
+}
+
+package express {
+  class Request
+  class Response
+
+  Response .right[hidden].> Controller
+}
+
+package film {
+  package entity #FFFFFF {
+    class Film <<entity>>
+
+    Film .[hidden].> Promise
+    Film .[hidden].> Request
+  }
+
+  package service {
+    class FilmWriteService << control >>
+    class FilmReadService << control >>
+  }
+
+  package rest #DDDDDD {
+    class FilmWriteController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
+      + @Post() @Roles() async post(@Body() film: Film, @Req() req: Request,  @Res() res: Response): Promise<Response>
+      + @Put() @Roles() async put(@Body() film: Film, @Param() id: number, @Headers() version: string, @Res() res: Response): Promise<Response>
+      + @Delete() @Roles() async delete(@Param() id: number, @Res() res: Response): Promise<Response>
+    }
+
+    FilmWriteController o--> "1" FilmWriteService : service
+    FilmWriteController o--> "1" FilmReadService : readService
+    FilmWriteController ..up> Film
+
+    FilmWriteController ..> Controller
+
+    FilmWriteController .up.> AuthGuard
+    FilmWriteController .up.> Roles
+
+    FilmWriteController ..> Request
+    FilmWriteController ..> Response
+    FilmWriteController ..> Promise
+
+    Film .up[hidden].> Roles
+    FilmWriteService .[hidden].> Request
+    FilmWriteService .[hidden].> Promise
+  }
+}
+
+hide empty members
+
+footer (c) Florian Sauer
+
+@enduml

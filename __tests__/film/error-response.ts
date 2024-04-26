@@ -17,20 +17,8 @@
  *
  */
 
-/**
- * Das Modul enthält Objekte mit Konfigurationsdaten aus der YAML-Datei.
- * @packageDocumentation
- */
-
-import { existsSync, readFileSync } from 'node:fs';
-import { load } from 'js-yaml';
-// eslint-disable-next-line unicorn/import-style
-import { resolve } from 'node:path';
-
-export const BASEDIR = existsSync('src') ? 'src' : 'dist';
-export const RESOURCES_DIR = resolve(BASEDIR, 'config', 'resources');
-
-const configFile = resolve(RESOURCES_DIR, 'app.yml');
-export const config = load(
-    readFileSync(configFile, 'utf8'), // eslint-disable-line security/detect-non-literal-fs-filename
-) as Record<string, any>;
+export interface ErrorResponse {
+    error?: string;
+    message: string;
+    statusCode: number;
+}

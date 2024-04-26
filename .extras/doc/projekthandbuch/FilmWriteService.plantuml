@@ -1,0 +1,78 @@
+' Copyright (c) 2024 - present Florian Sauer
+'
+' Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+' documentation files (the “Software”), to deal in the Software without restriction, including without limitation the
+' rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+' permit persons to whom the Software is furnished to do so, subject to the following conditions:
+'
+' The above copyright notice and this permission notice shall be included in all copies or substantial portions
+' of the Software.
+'
+' THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+' LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+' IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+' WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+' SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+' Preview durch <Alt>d
+
+@startuml Anwendungskern
+
+interface Promise<T>
+
+package @nestjs/common {
+  class "@Injectable" as Injectable
+  hide Injectable circle
+}
+
+package typeorm {
+  class Repository<T>
+}
+
+package @nestjs/typeorm {
+  class "@InjectRepository" as InjectRepository
+  hide InjectRepository circle
+}
+
+package mail {
+  class MailService
+}
+
+package film {
+  package entity {
+    class Film
+  }
+
+  package service #DDDDDD {
+    class VersionInvalid
+    class VersionOutdated
+
+    class FilmWriteService << control >> <<@Injectable()>> {
+      + async create(film: Film): Promise<number>
+      + async update(id: number, film: Film, version: string): Promise<number>
+      + async delete(id: number): Promise<boolean>
+    }
+
+    FilmWriteService o--> "1" FilmReadService: readService
+    FilmWriteService o--> "1" Repository: @InjectRepository repo
+    FilmWriteService o--> "1" MailService: mailService
+
+    FilmWriteService .up.> Injectable
+    FilmWriteService .up.> InjectRepository
+
+    FilmWriteService .up.> Promise
+    FilmWriteService ..> Film
+    FilmWriteService .up.> VersionInvalid
+    FilmWriteService .up.> VersionOutdated
+
+    Film .up[hidden].> Promise
+    Film .up[hidden].> Injectable
+    Film .up[hidden].> InjectRepository
+  }
+}
+
+hide empty members
+
+footer (c) Florian Sauer
+
+@enduml
